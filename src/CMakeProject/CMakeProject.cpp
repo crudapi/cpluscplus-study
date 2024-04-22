@@ -193,6 +193,26 @@ int ninenineDemo()
     return 0;
 }
 
+void piDemo()
+{
+    double x, y, r, pi;
+    int n = 0, N = 1e7;
+    srand(time(NULL));
+    for (int i = 0; i < N; i++)
+    {
+        x = rand() / double(RAND_MAX);//取值为0-1之间的随机数
+        y = rand() / double(RAND_MAX);
+        r = sqrt(x * x + y * y);
+        if (r <= 1)
+        {
+            ++n;
+
+        }
+    }
+    pi = n * 4.0 / N;
+    cout << pi << endl;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -224,6 +244,8 @@ int main()
     sumDemo();
 
     ninenineDemo();
+
+    piDemo();
 
     cinDemo();
 
