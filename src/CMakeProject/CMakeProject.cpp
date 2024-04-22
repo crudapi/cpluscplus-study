@@ -79,6 +79,22 @@ void getlineDemo(void)
     cout << "your second input line is:" << line << endl;
 }
 
+int getlineDemo2()
+{
+    int a = 0;
+    cin >> a;//第一行：这里输入了1234和回车（光标到下一行）
+    cout << a << endl;//第二行：这里输出了1234和一个回车（光标到下一行）
+    string line;
+    /*下面这里会直接得到cin留下来的回车键而结束，
+      导致line的内容为空，这不是我们想要的
+    */
+    getline(cin, line);//第三行
+    cout << line << endl; //这里输出一个回车（光标到下一行）
+    //第四行
+    cout << "getlineDemo2" << endl;
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -98,6 +114,8 @@ int main()
 	refDemo();
 
     nsDemo();
+
+    getlineDemo2();
 
     getlineDemo();
 
