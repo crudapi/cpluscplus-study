@@ -161,6 +161,20 @@ int iLoveYouDemo()
     return 0;
 }
 
+int sumDemo()
+{
+    int sum = 0;
+    for (int i = 1; i <= 100; ++i)
+    {
+        sum += i;
+
+    }
+
+    cout << sum;
+
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -188,6 +202,8 @@ int main()
     forDemo();
 
     iLoveYouDemo();
+
+    sumDemo();
 
     cinDemo();
 
