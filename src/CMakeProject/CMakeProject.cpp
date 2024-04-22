@@ -18,6 +18,25 @@ void refDemo() {
 	cout << "c=" << c << endl;
 }
 
+int cinDemo(void)
+{
+    int i = 0;
+
+    cin >> i;//从键盘输入整数给i
+    cout << i;//输出整数i到屏幕
+
+    return 0;
+}
+
+int cinStrDemo(void)
+{
+    string s;
+    cin >> s;//输入字符串
+    cout << s;//输出字符串
+
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -35,6 +54,10 @@ int main()
     cout << c << endl;
 
 	refDemo();
+
+    cinDemo();
+
+    cinStrDemo();
 
 	return 0;
 }
