@@ -147,6 +147,20 @@ int forDemo()
     return 0;
 }
 
+int iLoveYouDemo()
+{
+    for (int i = 0; i < 10000; ++i)
+    {
+        //要把说了多少次打印出来，这样显得有诚意！
+        //请填写代码让你的输出和下面的截图一样
+        //(1) your code
+        //输出字符串参考 https://blog.csdn.net/calmreason/article/details/126637396
+        //输出变量参考 https://blog.csdn.net/calmreason/article/details/126637512
+        cout << "I love you! " << i + 1 << endl;
+    }
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -172,6 +186,8 @@ int main()
     opDemo();
 
     forDemo();
+
+    iLoveYouDemo();
 
     cinDemo();
 
