@@ -138,6 +138,15 @@ int opDemo(void)
     return 0;
 }
 
+int forDemo()
+{
+    for (int i = 1; i <= 10; ++i)
+    {
+        cout << i;
+    }
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -161,6 +170,8 @@ int main()
     formatDemo();
 
     opDemo();
+
+    forDemo();
 
     cinDemo();
 
