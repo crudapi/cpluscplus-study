@@ -213,6 +213,40 @@ void piDemo()
     cout << pi << endl;
 }
 
+int evenDemo()
+{
+    if (-1) {
+        cout << "-1 is true" << endl;
+    }
+
+    for (int i = 1; i <= 10; ++i)
+    {
+        if (i % 2 == 0)
+        {
+            cout << i;
+        }
+    }
+    return 0;
+}
+
+int absDemo()
+{
+    int a = 0;//定义并初始化一个整型变量
+    cout << "请输入一个整数：";
+    cin >> a;
+    int abs_a = 0;
+    if (a < 0)
+    {
+        abs_a = -a;//a的相反数
+    }
+    else
+    {
+        abs_a = a;//a本身
+    }
+    cout << "a的绝对值为：" << abs_a;
+    return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -246,6 +280,10 @@ int main()
     ninenineDemo();
 
     piDemo();
+
+    evenDemo();
+
+    absDemo();
 
     cinDemo();
 
