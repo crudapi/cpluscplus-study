@@ -3,6 +3,7 @@
 
 #include "CMakeProject.h"
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -95,6 +96,24 @@ int getlineDemo2()
     return 0;
 }
 
+void formatDemo()
+{
+    double i = 100 / 3.0; //33.33333333333......
+    double you = 200 / 3.0; //66.66666666666......
+    //fixed使用小数计数法(而不是科学计数法)显示浮点数
+    //setprecision(4) 小数部分保留4位，最后一位四舍五入
+    cout << fixed << setprecision(4)
+        << i << endl
+        << you << endl
+        ;
+
+    std::cout << std::setw(10) << std::setfill('0');
+    std::cout << 77 << std::endl;
+    bool b = true;
+    std::cout <<  b << std::endl;
+    std::cout << std::boolalpha << b << std::endl;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -114,6 +133,8 @@ int main()
 	refDemo();
 
     nsDemo();
+
+    formatDemo();
 
     getlineDemo2();
 
