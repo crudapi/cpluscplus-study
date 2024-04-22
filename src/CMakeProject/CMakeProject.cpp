@@ -90,7 +90,7 @@ int getlineDemo2()
       导致line的内容为空，这不是我们想要的
     */
     getline(cin, line);//第三行
-    cout << line << endl; //这里输出一个回车（光标到下一行）
+    cout << "line:" << line << endl; //这里输出一个回车（光标到下一行）
     //第四行
     cout << "getlineDemo2" << endl;
     return 0;
@@ -112,6 +112,30 @@ void formatDemo()
     bool b = true;
     std::cout <<  b << std::endl;
     std::cout << std::boolalpha << b << std::endl;
+}
+
+int opDemo(void)
+{
+    cout << "opDemo "  << endl;
+    int a = 3;
+    int b = 4;
+    bool c = a > b;
+    cout << boolalpha << c << endl;
+
+    c = a > b || a != 0;
+    cout << c << endl;
+
+    //字符相等
+    char d = '%';
+    bool is_char_equal = (d == '%');
+    cout << "is char equal ? " << is_char_equal << endl;
+
+    //字符串相等
+    string str("abcdefg123456");
+    bool is_str_equal = (str == "abcdefg123456");
+    cout << "is string equal ? " << is_str_equal << endl;
+
+    return 0;
 }
 
 int main()
@@ -136,13 +160,15 @@ int main()
 
     formatDemo();
 
-    getlineDemo2();
-
-    getlineDemo();
+    opDemo();
 
     cinDemo();
 
     cinStrDemo();
+
+    getlineDemo();
+
+    getlineDemo2();
 
 	return 0;
 }
