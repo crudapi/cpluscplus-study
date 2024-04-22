@@ -2,6 +2,7 @@
 //
 
 #include "CMakeProject.h"
+#include <string>
 
 using namespace std;
 
@@ -68,6 +69,15 @@ void nsDemo(void)
     start();//再次执行名称空间F中的start函数
 }
 
+void getlineDemo(void)
+{
+    cout << "please input 2 lines:" << endl;
+    string line;
+    std::getline(cin, line);//这里程序等待你手动输入一行，按回车键结束这一行的输入
+    cout << "your first input line is:" << line << endl;
+    std::getline(cin, line);//这里程序等待你手动输入一行，按回车键结束这一行的输入
+    cout << "your second input line is:" << line << endl;
+}
 
 int main()
 {
@@ -88,6 +98,8 @@ int main()
 	refDemo();
 
     nsDemo();
+
+    getlineDemo();
 
     cinDemo();
 
