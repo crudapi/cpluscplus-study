@@ -37,6 +37,38 @@ int cinStrDemo(void)
     return 0;
 }
 
+namespace F {
+    void start() { cout << "F::start" << endl;  }
+    void stop() { cout << "F::stop" << endl; }
+}
+namespace G {
+    void start() { cout << "G::start" << endl; }
+    void stop() { cout << "G::stop" << endl; }
+}
+//我们也可以在std名称空间中添加类，虽然一般不这么做，这里仅仅用于帮助我们理解什么是名称空间
+namespace std {
+    struct Student {
+        Student() {
+            { cout << "std::Student" << endl; }
+        }
+    };
+}
+
+void nsDemo(void)
+{
+    F::start();//通过名称空间名称F访问该名称空间中的函数start,下同
+    F::stop();
+
+    G::start();
+    G::stop();
+
+    std::Student my;
+
+    using namespace F;//将名称空间F中的名称暴露出来，不需要使用F::也可以访问
+    start();//再次执行名称空间F中的start函数
+}
+
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -54,6 +86,8 @@ int main()
     cout << c << endl;
 
 	refDemo();
+
+    nsDemo();
 
     cinDemo();
 
