@@ -5,6 +5,19 @@
 
 using namespace std;
 
+void refDemo() {
+	int a = 1;
+	int& b = a;//创建别名（引用）
+	int c = a;//创建副本（拷贝）
+
+	b = 222;//修改 a 
+	c = 333;//修改 c
+
+	cout << "a=" << a << endl;
+	cout << "b=" << b << endl;
+	cout << "c=" << c << endl;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -20,6 +33,8 @@ int main()
 
     char c = 'c';
     cout << c << endl;
+
+	refDemo();
 
 	return 0;
 }
