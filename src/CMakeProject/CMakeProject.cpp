@@ -149,7 +149,7 @@ int forDemo()
 
 int iLoveYouDemo()
 {
-    for (int i = 0; i < 10000; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         //要把说了多少次打印出来，这样显得有诚意！
         //请填写代码让你的输出和下面的截图一样
@@ -171,6 +171,24 @@ int sumDemo()
     }
 
     cout << sum;
+
+    return 0;
+}
+
+
+
+int ninenineDemo()
+{
+    cout << endl;
+    for (int i = 1; i <= 9; ++i)
+    {
+        for (int j = 1; j <= i; ++j)
+        {
+            //(1) your code 请在下面一行填写代码，让程序输出和预期输出一致的内容
+            cout << j << "*" << i << "=" << i * j << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
@@ -204,6 +222,8 @@ int main()
     iLoveYouDemo();
 
     sumDemo();
+
+    ninenineDemo();
 
     cinDemo();
 
