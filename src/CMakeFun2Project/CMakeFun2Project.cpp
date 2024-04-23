@@ -87,6 +87,13 @@ void test(int n)
     }
 }
 
+int Euclid(int m, int n)
+{
+    if (n == 0) return m;
+    if (n == 1) return 1;
+    return Euclid(n, m % n);
+}
+
 int main()
 {
     print(123456);
@@ -117,4 +124,13 @@ int main()
     test(99);
     test(100);
     test(101);
+
+    cout << "Euclid (1, 1) = " << Euclid(1, 1) << endl;
+    cout << "Euclid (2, 4) = " << Euclid(2, 4) << endl;
+    cout << "Euclid (4, 2) = " << Euclid(4, 2) << endl;
+    cout << "Euclid (2, 8) = " << Euclid(2, 8) << endl;
+    cout << "Euclid (8, 2) = " << Euclid(8, 2) << endl;
+    cout << "Euclid (10000, 10) = " << Euclid(10000, 10) << endl;
+    cout << "Euclid (7, 9) = " << Euclid(7, 9) << endl;
+    cout << "Euclid (1997, 615) = " << Euclid(1997, 615) << endl;
 }
