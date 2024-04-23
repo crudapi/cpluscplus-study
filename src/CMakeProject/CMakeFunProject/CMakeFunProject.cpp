@@ -86,6 +86,12 @@ void Swap2(int& i, int& j)//注意这里一定要传递引用，否则传值是�
 
 }
 
+template<typename T>
+bool biggerThan(const T& lhs, const T& rhs)
+{
+    return lhs > rhs;
+}
+
 int main()
 {
     print();//调用（使用）函数print
@@ -133,6 +139,9 @@ int main()
 
     Swap2(a, b);
     cout << "a=" << a << ", b=" << b << endl;
+
+    cout << "123 > 456 ? : " << biggerThan(123, 456) << endl;
+    cout << "1.0 > 2.0 ? : " << biggerThan(1.0, 2.0) << endl;
 
     return 0;
 }
