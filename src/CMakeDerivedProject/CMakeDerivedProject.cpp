@@ -263,4 +263,19 @@ int main()
 	test_reverse_iterate_by_index2();
 
 	forDemo();
+
+	vector<int> arr1{ 1, 2, 3 };
+	auto arr_copy = arr1; // arr_copy 有自己的独立的内存空间，也有三个变量，分别存储着 1 ，2 ，3；
+
+
+	int aaa = 4;
+
+	vector<int> arr;
+	arr.push_back(aaa);//a并没有进入容器，a的副本在容器里被创建了出来
+
+	aaa = 5;
+
+	cout << arr.back() << endl;//输出4，不会输出5
+
+
 }
