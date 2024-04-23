@@ -5,6 +5,51 @@
 
 using namespace std;
 
+void BubbleSort(int* arr, int n)
+{
+    for (int i = 0; i < n; ++i) {
+        for (int j = 1; j < n - i; j++) {
+            if (arr[j - 1] > arr[j]) { // swap if out of order
+                //(1) your code 
+                // swap arr[j-1] and arr[j]
+                int t = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = t;
+            }
+        }
+
+
+        //输出排序后的序列
+        for (int i = 0; i < n; i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int Sort()
+{
+    int n = 8;
+    int* arr = new int[n] {49, 38, 65, 97, 76, 13, 27, 49};//申请8个int变量,并初始化
+    //输出排序后的序列
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    //执行排序
+    BubbleSort(arr, 8);
+
+    //输出排序后的序列
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    delete[] arr;//释放动态数组需要用delete[]
+    return 0;
+}
+
 int main()
 {
     //10门课
@@ -46,6 +91,8 @@ int main()
     //释放动态内存
     delete[] score_list;
     delete[] credit_hour_list;
+
+    Sort();
 
     return 0;
 }
