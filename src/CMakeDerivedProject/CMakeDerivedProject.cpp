@@ -3,6 +3,7 @@
 
 #include "CMakeDerivedProject.h"
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -107,10 +108,75 @@ int iteratorDemo()
 {
 	vector<int> v{ 1,2,3,4,5,6,7,8,9 };//初始化9个元素
 
-	for (auto itr = v.begin(); itr != v.end(); ++itr)
+	for (vector<int>::iterator itr = v.begin(); itr != v.end(); ++itr)
 	{
 		cout << *itr << " ";
 	}
+
+	return 0;
+}
+
+int iteratorDemo2()
+{
+	//定义一个数组，并放入一些整数
+	vector<int> a{ 0,1,2,3,4,5,6,7,8,9 };
+	//使用下标遍历数组输出其中的每一个元素
+	for (int i = 0; i < a.size(); ++i)
+	{
+		cout << a[i] << " ";
+	}
+	cout << endl;
+	//使用迭代器输出数组中的每一个元素
+	for (auto itr = a.begin(); itr != a.end(); ++itr)
+	{
+		cout << *itr << " ";//使用解引用操作符*获得迭代器迭代到的元素的引用
+	}
+	return 0;
+}
+
+struct Student
+{
+	int get_age() { return m_age; }
+	void set_age(int age) { m_age = age; }
+
+	string m_name;
+private:
+	int m_age;
+};
+
+int StudentDemo()
+{
+	int i = 0;
+	vector<Student> student_array(3);//创建一个vector，里面存放3个Student对象
+	for (auto itr = student_array.begin(); itr != student_array.end(); ++itr)
+	{
+		//使用成员操作符修改对象的名字
+		itr->m_name = "name" + to_string(++i);
+		//使用成员操作符调用对象的成员函数
+		itr->set_age(i + 18);
+	}
+
+	for (auto itr = student_array.begin(); itr != student_array.end(); ++itr)
+	{
+		//使用成员操作符读取对象的名字
+		cout << "My name is " << itr->m_name
+			<< ", I'm " << itr->get_age() << " years old." << endl;
+	}
+
+	for (auto itr = student_array.begin(); itr != student_array.end(); ++itr)
+	{
+		(*itr).m_name = "name2" + to_string(++i);// itr->m_name 更直观
+		(*itr).set_age(i + 118); // itr->set_age() 更直观
+	}
+
+	for (auto itr = student_array.begin(); itr != student_array.end(); ++itr)
+	{
+		//使用成员操作符读取对象的名字
+		cout << "My name is " << itr->m_name
+			<< ", I'm " << itr->get_age() << " years old." << endl;
+	}
+
+
 
 	return 0;
 }
@@ -144,4 +210,8 @@ int main()
 	cout << a << endl;
 
 	iteratorDemo();
+
+	iteratorDemo2();
+
+	StudentDemo();
 }
