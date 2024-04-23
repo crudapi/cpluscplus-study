@@ -181,6 +181,33 @@ int StudentDemo()
 	return 0;
 }
 
+void test_reverse_iterate_by_index(void)
+{
+	cout << "reverses iterate vector by index:";
+
+	vector<int> arr{ 1, 2, 3 };
+
+	for (size_t i = arr.size(); i > 0; --i)
+	{
+		cout << arr[i - 1] << " ";
+	}
+	cout << endl;
+}
+
+
+int test_reverse_iterate_by_index2()
+{
+	vector<int> a{ 0,1,2,3,4,5,6,7,8,9 };
+	//rbegin() 获取逆序迭代器的第一个迭代器；
+	//rend() 获得逆序迭代器的最后一个迭代器的下一个位置（哨兵）
+	for (auto itr = a.rbegin(); itr != a.rend(); ++itr)
+	{
+		cout << *itr << " ";
+	}
+	return 0;
+}
+
+
 int main()
 {
 	Derived d;
@@ -214,4 +241,13 @@ int main()
 	iteratorDemo2();
 
 	StudentDemo();
+
+	size_t i = 0;
+	--i; //ffff ffff ffff ffff
+	cout << std::hex <<  i << endl;
+
+	test_reverse_iterate_by_index();
+
+	test_reverse_iterate_by_index2();
+
 }
