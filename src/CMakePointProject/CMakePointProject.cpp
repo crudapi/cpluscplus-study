@@ -74,6 +74,83 @@ int unRefDemo()
 	return 0;
 }
 
+void fun(int& a)//(1) 这里的 & 表示参数a是引用类型
+{
+	a = 4;
+}
+
+void fun2(int* p)
+{
+	*p = 6;
+}
+
+void pointDemo() {
+	int n = 2;
+	cout << "n=" << n << endl;
+
+	int& nn = n;//(2) 这里的 & 是引用类型， nn 是 n 的别名
+	nn = 3;
+
+
+	cout << "n=" << n << endl;
+
+	fun(n);
+	cout << "n=" << n << endl;
+
+	int* p = &n;//(3) 这里的 & 是取地址运算符，&n 是 n 的地址
+	*p = 5;
+	cout << "n=" << n << endl;
+
+	fun2(&n);//(3) 这里的 & 是取地址运算符，&n 是 n 的地址
+	cout << "n=" << n << endl;
+}
+
+void fun(int* p)
+{
+	*p = 123;//*p解引用，得到地址所在的变量，并对变量赋值为123
+}
+
+int funDemo()
+{
+	int a = 0;
+
+	cout << "a=" << a << endl;
+
+	fun(&a);//&a 取变量a的地址，传递给函数fun
+
+	cout << "a=" << a << endl;
+
+	return 0;
+}
+
+void funArr(int* p)
+{
+	//下面的 4 种修改堆数组的写法是一样的
+	*p = 4;//修改堆数组的第1个元素；等价于 *(p+0) ，等价于 p[0]
+	*(p + 1) = 5;//修改堆数组的第2个元素
+	p[2] = 6;//修改堆数组的第3个元素
+
+	p = p + 3;//指针移动跳过 3 个整型变量
+	*p = 7;//此时p指向对数组的最后一个元素
+}
+
+int funArrDemo()
+{
+	//开辟包含4个元素的堆数组，每个元素的值分别是0 1 2 3
+	int* arr = new int[4] {0, 1, 2, 3};
+
+	//输出数组内容
+	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+
+	int* p = arr;
+	funArr(p);//堆数组的第一个元素的地址，传递给函数fun
+
+	//输出数组内容
+	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+
+	return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -94,6 +171,12 @@ int main()
 	nullptrDemo();
 
 	unRefDemo();
+
+	pointDemo();
+	
+	funDemo();
+
+	funArrDemo();
 
 	return 0;
 }
