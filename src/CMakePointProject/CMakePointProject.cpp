@@ -57,6 +57,23 @@ int nullptrDemo(void)
 	return 0;
 }
 
+int unRefDemo()
+{
+	int* a = new int{ 123 };//创建一个栈上的地址变量 a，a 存储了堆上一个无名变量的地址。
+
+
+	//下面的 *a 叫做：解引用。
+	//用 * 和地址变量结合得到无名变量本身。并给无名变量赋值为 2
+
+	cout << "a = " << *a << endl;//输出无名变量的值
+
+	*a = 2;
+
+	cout << "a = " << *a << endl;//输出无名变量的值
+
+	return 0;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -75,6 +92,8 @@ int main()
 	f();
 
 	nullptrDemo();
+
+	unRefDemo();
 
 	return 0;
 }
