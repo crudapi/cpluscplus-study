@@ -142,11 +142,18 @@ int funArrDemo()
 	//输出数组内容
 	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
 
+	int arr2[4] = {0, 1, 2, 3};
+	cout << "arr2 : " << arr2[0] << ", " << arr2[1] << ", " << arr2[2] << ", " << arr2[3] << endl;
+	cout << "arr2 : " << *arr2 << ", " << *(arr2 + 1) << ", " << *(arr2 + 3) << ", " << *(arr2 + 3) << endl;
+
 	int* p = arr;
 	funArr(p);//堆数组的第一个元素的地址，传递给函数fun
 
+	funArr(arr2);
+
 	//输出数组内容
 	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+	cout << "arr2 : " << arr2[0] << ", " << arr2[1] << ", " << arr2[2] << ", " << arr2[3] << endl;
 
 	return 0;
 }
