@@ -62,6 +62,30 @@ int max2(int a, int b)
     return (a >= b) ? a : b;//三元表达式： 表达式为true 吗 ? 返回值1 : 返回值2;
 }
 
+int swap()
+{
+    int a = 1;
+    int b = 2;
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    int t = a;
+    a = b;
+    b = t;
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    return 0;
+}
+
+void Swap2(int& i, int& j)//注意这里一定要传递引用，否则传值是不能完成任务的
+{
+    int t = i;
+    i = j;
+    j = t;
+
+}
+
 int main()
 {
     print();//调用（使用）函数print
@@ -69,17 +93,17 @@ int main()
 
     forDemo();
 
-    int a = 1;
+    int a1 = 1;
 
-    f1(a); //f1创建一个新的变量v，并把a的值赋值给v
+    f1(a1); //f1创建一个新的变量v，并把a的值赋值给v
     //函数f1修改的是v的值，a的值不变
-    cout << endl << a << endl;//仍然是1
+    cout << endl << a1 << endl;//仍然是1
 
-    f2(a);//把a本身传递给函数
-    cout << a << endl;//a被函数修改了，此时是2
+    f2(a1);//把a本身传递给函数
+    cout << a1 << endl;//a被函数修改了，此时是2
 
     //f3用v作为a的别名,在f3内部直接打印a
-    f3(a);
+    f3(a1);
 
     int n1 = 786;
     int n2 = 765;
@@ -100,6 +124,15 @@ int main()
         << m2 << ", "
         << m3 << " is "
         << m << endl;
+
+    swap();
+
+    int a = 2;
+    int b = 3;
+    cout << "a=" << a << ", b=" << b << endl;
+
+    Swap2(a, b);
+    cout << "a=" << a << ", b=" << b << endl;
 
     return 0;
 }
