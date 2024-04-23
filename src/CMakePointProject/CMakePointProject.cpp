@@ -158,6 +158,25 @@ int funArrDemo()
 	return 0;
 }
 
+void arrArrDemo() {
+	int a = 0;
+	int b = 1;
+	int arr[4] = { 0, 1, 2, 3 };
+	
+
+	cout << "sizeof:" << endl << sizeof(a) << endl;
+	cout << "&a:" << endl << &a << endl;
+	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+	cout << "&b:" << endl << &b << endl;
+
+	cout << arr << endl;
+	cout << &arr << endl;
+	cout << &arr[0] << endl;
+	cout << arr + 1<< endl;
+	cout << &arr + 1 << endl;
+	cout << &arr[0] + 1 << endl;
+}
+
 int main()
 {
 	cout << "Hello CMake." << endl;
@@ -184,6 +203,8 @@ int main()
 	funDemo();
 
 	funArrDemo();
+
+	arrArrDemo();
 
 	return 0;
 }
