@@ -2,6 +2,7 @@
 //
 
 #include "CMakeDerivedProject.h"
+#include <vector>
 
 using namespace std;
 
@@ -23,6 +24,26 @@ public:
 	int b;
 };
 
+int vectorDemo()
+{
+	vector<int> a;
+
+	cout << "vector size:" << a.size() << endl;
+
+	for (size_t i = 0; i < 10; ++i)
+	{
+		a.push_back(i);
+	}
+
+	cout << "vector size:" << a.size() << endl;
+	for (size_t i = 0; i < a.size(); ++i)
+	{
+		cout << a[i] << " ";
+	}
+	cout << endl;
+	return 0;
+};
+
 int main()
 {
 	Derived d;
@@ -36,4 +57,6 @@ int main()
 	d.b = 2;
 	d.g();
 	cout << d.b << endl;
+
+	vectorDemo();
 }
