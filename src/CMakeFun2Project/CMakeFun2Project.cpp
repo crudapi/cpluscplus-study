@@ -32,12 +32,28 @@ int CommFactor(int m, int n)
         //(1) your code 
         n = z;
 
-        z = m% n;
+        z = m % n;
     }
     //n总是最后一次不会0的值，作为返回值
     cout << n << endl;
     return n;
 }
+
+/*输出正整数n各个位上的数字
+  暂时不支持0和负数*/
+void print2(unsigned int n)
+{
+    if (n == 0)//递归函数必须要有结束条件，不然会一直调用自己，最终把栈空间撑爆溢出，程序终止
+    {
+        return;
+    }
+    unsigned int m = n % 10;//求出最后一位数字
+    n = n / 10;//抛弃最后一位数字
+    print2(n);//使用剩下的数字构成的整数，再重复此过程
+    cout << m << "  ";//输出最后一位数字
+
+}
+
 
 int main()
 {
@@ -56,5 +72,10 @@ int main()
     CommFactor(7, 9);
     CommFactor(1997, 615);
 
-
+    cout << endl <<  "print2" << endl;
+    print2(123456);
+    cout << endl << "print2" << endl;
+    print2(300);
+    cout << endl << "print2" << endl;
+    print2(1);
 }
