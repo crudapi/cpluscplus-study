@@ -45,6 +45,23 @@ void f3(const int& v)
     cout << v;
 }
 
+int max(int a, int b)
+{
+    if (a >= b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
+}
+
+int max2(int a, int b)
+{
+    return (a >= b) ? a : b;//三元表达式： 表达式为true 吗 ? 返回值1 : 返回值2;
+}
+
 int main()
 {
     print();//调用（使用）函数print
@@ -63,6 +80,26 @@ int main()
 
     //f3用v作为a的别名,在f3内部直接打印a
     f3(a);
+
+    int n1 = 786;
+    int n2 = 765;
+
+    int n = max(n1, n2);
+
+    cout << "max(" << n1 << "," << n2 << ") = " << n << endl;
+
+    int m1 = 786;
+    int m2 = 765;
+    int m3 = 766;
+
+    int m = max2(m1, m2);
+    m = max2(m, m3);
+
+    cout << "max of "
+        << m1 << ", "
+        << m2 << ", "
+        << m3 << " is "
+        << m << endl;
 
     return 0;
 }
