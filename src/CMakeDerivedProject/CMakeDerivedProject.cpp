@@ -207,6 +207,18 @@ int test_reverse_iterate_by_index2()
 	return 0;
 }
 
+int forDemo(void)
+{
+	vector<int> v{ 1,2,3,4,5,6 };
+	//auto& 表示item是元素的引用（而不是拷贝）
+	//如果使用 auto，则拿到的是容器元素的拷贝
+	for (auto& item : v)
+	{
+		cout << item << " ";//item遍历list1的每一个元素
+	}
+
+	return 0;
+}
 
 int main()
 {
@@ -250,4 +262,5 @@ int main()
 
 	test_reverse_iterate_by_index2();
 
+	forDemo();
 }
