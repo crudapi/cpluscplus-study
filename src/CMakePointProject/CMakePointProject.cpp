@@ -159,22 +159,23 @@ int funArrDemo()
 }
 
 void arrArrDemo() {
-	int a = 0;
-	int b = 1;
 	int arr[4] = { 0, 1, 2, 3 };
 	
-
-	cout << "sizeof:" << endl << sizeof(a) << endl;
-	cout << "&a:" << endl << &a << endl;
 	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
-	cout << "&b:" << endl << &b << endl;
 
-	cout << arr << endl;
-	cout << &arr << endl;
-	cout << &arr[0] << endl;
-	cout << arr + 1<< endl;
-	cout << &arr + 1 << endl;
-	cout << &arr[0] + 1 << endl;
+	cout << "arr: " << arr << endl;
+	cout << "&arr[0]: " << &arr[0] << endl;
+	cout << "&arr: " << &arr << endl;
+	cout << "arr + 1: " << arr + 1<< endl;
+	cout << "&arr[0] + 1: " << &arr[0] + 1 << endl;
+	cout << "&arr + 1: " << &arr + 1 << endl;
+
+	*(&arr[0] + 1) = 11;
+	
+	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+
+	cout << "arr : " << arr[0] << ", " << arr[1] << ", " << arr[2] << ", " << arr[3] << endl;
+
 }
 
 int main()
