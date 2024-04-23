@@ -103,6 +103,18 @@ int stringDemo()
 	return 0;
 }
 
+int iteratorDemo()
+{
+	vector<int> v{ 1,2,3,4,5,6,7,8,9 };//初始化9个元素
+
+	for (auto itr = v.begin(); itr != v.end(); ++itr)
+	{
+		cout << *itr << " ";
+	}
+
+	return 0;
+}
+
 int main()
 {
 	Derived d;
@@ -124,4 +136,12 @@ int main()
 	max2Demo();
 
 	stringDemo();
+
+	int  a = 1;
+	auto b = a;//b的类型为a的类型 int
+	int c = b;
+	cout << b << endl;
+	cout << a << endl;
+
+	iteratorDemo();
 }
