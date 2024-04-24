@@ -11,6 +11,10 @@ struct Student
     Student() { cout << "Student()" << endl; }//默认构造函数 default constructor
     Student(int age) { cout << "Student(" << age << ")" << endl; };//非默认构造函数
     Student(int age, bool sex) { cout << "Student(" << age << ", " << boolalpha << sex << ")" << endl; };//非默认构造函数
+
+    ~Student() {//析构函数的执行是回收对象资源的最佳机会
+        cout << "Student destructor called." << endl;
+    }
 };
 
 struct Student2
