@@ -23,9 +23,16 @@ struct Student
 
 int main(void)
 {
+	//(1) your code. 
+	// 提示创建对象之后，更早释放的办法之一就是使用大括号作用域（在大括号内创建对象）；
+	// 或者使用动态内存手动管理决定何时释放
+
 	Student s1;
-	Student s2;
-	Student s3;
+	{
+		Student s2;
+		Student s3;
+	}
+	Student s4;
 
 	return 0;
 }
