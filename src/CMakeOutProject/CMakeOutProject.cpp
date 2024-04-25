@@ -17,6 +17,10 @@ class Student
 	//友元friend表示这个函数不是类的成员函数，而是一个全局函数，
 	//而且可以访问类的私有成员：不然在函数内访问类的私有成员就只能写stu.get_id() stu.get_name() stu.get_age()这样的代码
 	friend std::ostream& operator<<(std::ostream& os, const Student& stu);
+
+	//由于输入操作符函数会写(修改)对象的成员变量，所以不可以传const参数
+	friend std::istream& operator>>(std::istream& os, Student& stu);
+public:
 public:
 	std::string m_id;//学号
 	std::string m_name;//姓名
@@ -35,6 +39,15 @@ std::ostream& operator<<(std::ostream& os, const Student& stu)
 		<< stu.m_date;
 	return os;//这样os就可以连续输出多个对象。例如， cout<<stu1<<stu2;
 }
+std::istream& operator>>(std::istream& is, Student& stu)
+{
+	is
+		>> stu.m_id
+		>> stu.m_name
+		>> stu.m_age
+		>> stu.m_date;
+	return is;
+}
 
 int main(int argc, char** argv)
 {
@@ -47,6 +60,18 @@ int main(int argc, char** argv)
 	std::ofstream fout("students.txt");
 	//输出学生信息到文件
 	fout << stu << std::endl;
+
+	//定义一个学生对象
+	Student stu2;
+	std::ifstream fin("students.txt");
+	if (!fin.is_open())
+	{
+		std::cout << "error! can not open file students.txt!" << std::endl;
+		return -1;
+	}
+	fin >> stu2;//从文件中读取信息赋值给stu
+	//输出学生信息到文件
+	std::cout << stu2 << std::endl;
 
 	return 0;
 }
