@@ -219,6 +219,7 @@ public:
 		//(1) your code
 		//read board size : row and col . 
 		//see https://blog.csdn.net/calmreason/article/details/126686679
+		iss >> row_count >> column_count;
 
 		for (int row = 0; row < row_count; row++)
 		{
@@ -232,19 +233,21 @@ public:
 				// (2) your code
 				//  read data from istringstream , and store it to line data
 				//  see : https://blog.csdn.net/calmreason/article/details/126736091
-
+				lineDataIss >> element;
+				lineData.push_back(element);
 
 				//将组成蛇的头1存放到蛇m_snakeBody容器中，蛇一开始没有身体，只有一个蛇头
 				//判断两个char相等即可
 				if (element == '1')
 				{
 					//(3) your code   IncreaseOnlyBody
-
+					pair<int, int> snakePair(row, column);
+					m_model.m_snakeBody.push_back(snakePair);
 				}
 			}
 			//将第一行数据存放到二维数组中，作为第一维的一个元素（子数组）
 			//(4) your code : AppendToBoard  lineData
-
+			m_model.m_playBoard.push_back(lineData);
 		}
 		if (m_model.m_snakeBody.empty())
 		{
