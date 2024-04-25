@@ -63,7 +63,11 @@ void erase_person(PersonManager* personMgr, int index)
     assert(index >= 0 && index < personMgr->size);
     for (int i = index; i < personMgr->size - 1; i++)
     {
-        //(3) your code
+        if (personMgr->m_allPerson[i].m_id == -1)
+        {
+            //(4) your code
+            
+        }
 
     }
     personMgr->size -= 1;
@@ -79,10 +83,14 @@ bool DeletePerson(PersonManager* personMgr)
         if (personMgr->m_allPerson[i].m_id == id)
         {
             //(4) your code
+            personMgr->m_allPerson[i].m_id = -1;
 
+            personMgr->m_allPerson[i] = personMgr->m_allPerson[personMgr->size - 1];
+            personMgr->size -= 1;
             return true;
         }
     }
+
     return false;
 }
 bool QueryPersonByName(PersonManager* personMgr)
