@@ -1,3 +1,8 @@
+ï»¿// CMakeQueryProject.cpp: å®šä¹‰åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
+//
+
+#include "CMakeQueryProject.h"
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -23,7 +28,7 @@ private:
 	shared_ptr<set<size_t> > m_linesFound;
 	shared_ptr<vector<string>> m_allLineText;
 };
-//(1) your code ÇëÊµÏÖCQueryResultµÄÓĞ²Î¹¹Ôìº¯Êı
+//(1) your code è¯·å®ç°CQueryResultçš„æœ‰å‚æ„é€ å‡½æ•°
 
 CQueryResult::CQueryResult(const string& queryWord, shared_ptr<set<size_t> > lines
 	, shared_ptr<vector<string> > lineText)
@@ -38,12 +43,13 @@ string makeAppend(int _n, const string& _original, const string& _append)
 {
 	return _n > 1 ? _original + _append : _original;
 }
-//(2) your code ÇëÊµÏÖCQueryResultÀàµÄÊä³ö²Ù×÷·ûÖØÔØ
+//(2) your code è¯·å®ç°CQueryResultç±»çš„è¾“å‡ºæ“ä½œç¬¦é‡è½½
 ostream& operator<<(ostream& os, const CQueryResult& queryResult)
 {
-	for (auto& it = queryResult.m_queryWord.begin(); it != queryResult.m_queryWord.end(); it++)
+	cout << queryResult.m_queryWord << " occurs " << queryResult.m_linesFound.get()->size() << " times" << endl;
+	for (auto it = queryResult.m_linesFound.get()->begin(); it != queryResult.m_linesFound.get()->end(); it++)
 	{
-		cout << *it;
+		cout << "[[line " << (*it + 1) << "]]:" << (*queryResult.m_allLineText)[*it] << endl;
 	}
 
 	return os;
@@ -52,16 +58,16 @@ ostream& operator<<(ostream& os, const CQueryResult& queryResult)
 class CTextQuery
 {
 public:
-	//¶ÁÈ¡ÎÄ¼şÄÚÈİ£¬ÔÚÄÚ´æÖĞÉú³É½á¹¹»¯µÄ±ãÓÚ²éÕÒµÄÊı¾İ½á¹¹
+	//è¯»å–æ–‡ä»¶å†…å®¹ï¼Œåœ¨å†…å­˜ä¸­ç”Ÿæˆç»“æ„åŒ–çš„ä¾¿äºæŸ¥æ‰¾çš„æ•°æ®ç»“æ„
 	CTextQuery(ifstream& _fin);
-	//Ìá¹©¸øÓÃ»§µÄ²éÑ¯½Ó¿Ú
+	//æä¾›ç»™ç”¨æˆ·çš„æŸ¥è¯¢æ¥å£
 	CQueryResult query(const string& queryWord) const;
 public:
 	friend ostream& operator<<(ostream& os, const CTextQuery& _queryResult);
 
 private:
 	shared_ptr<vector<string> > m_allLineText;
-	//°´ĞĞÊä³öµÄÊ±ºòÎÒÃÇÏ£Íû°´ÕÕĞĞºÅÊä³ö£¬ËùÒÔĞĞºÅÈİÆ÷Ó¦¸ÃÊÇ×Ô´øÅÅĞò¹¦ÄÜµÄ
+	//æŒ‰è¡Œè¾“å‡ºçš„æ—¶å€™æˆ‘ä»¬å¸Œæœ›æŒ‰ç…§è¡Œå·è¾“å‡ºï¼Œæ‰€ä»¥è¡Œå·å®¹å™¨åº”è¯¥æ˜¯è‡ªå¸¦æ’åºåŠŸèƒ½çš„
 	map<string, shared_ptr<set<size_t> > > m_wordMap;
 };
 CTextQuery::CTextQuery(ifstream& _fin)
@@ -71,15 +77,15 @@ CTextQuery::CTextQuery(ifstream& _fin)
 	int currentLine = 0;
 	while (getline(_fin, lineText))
 	{
-		//cout<<currentLine+1<<" "<<lineText<<endl;//´òÓ¡Ô­ÎÄ°üÀ¨ĞĞÊı
-		//(4) your code ½«¶ÁÈ¡µ½µÄÒ»ĞĞ·Åµ½³ÉÔ±±äÁ¿Àï´æÆğÀ´
+		//cout<<currentLine+1<<" "<<lineText<<endl;//æ‰“å°åŸæ–‡åŒ…æ‹¬è¡Œæ•°
+		//(4) your code å°†è¯»å–åˆ°çš„ä¸€è¡Œæ”¾åˆ°æˆå‘˜å˜é‡é‡Œå­˜èµ·æ¥
 		m_allLineText->push_back(lineText);
 
 		istringstream iss(lineText);
 		string word;
 		while (iss >> word)
 		{
-			auto& lines = m_wordMap[word];//Ã»ÓĞ»á´´½¨¿ÕµÄshared_ptr,×¢ÒâÕâÀïµÄÒıÓÃÀàĞÍ£¨ÓĞºÎºÃ´¦£¿£©
+			auto& lines = m_wordMap[word];//æ²¡æœ‰ä¼šåˆ›å»ºç©ºçš„shared_ptr,æ³¨æ„è¿™é‡Œçš„å¼•ç”¨ç±»å‹ï¼ˆæœ‰ä½•å¥½å¤„ï¼Ÿï¼‰
 			if (!lines)
 			{
 				lines.reset(new set<size_t>);
@@ -90,13 +96,15 @@ CTextQuery::CTextQuery(ifstream& _fin)
 	}
 }
 
+//CQueryResult(const string& queryWord, shared_ptr<set<size_t> > lines, shared_ptr<vector<string> > lineText);
+
 CQueryResult CTextQuery::query(const string& word) const
 {
-	//(3) your code ÇëÊµÏÖ²éÑ¯½Ó¿Ú
-	auto& lines = m_wordMap[word];
+	//(3) your code è¯·å®ç°æŸ¥è¯¢æ¥å£
+	auto lines = m_wordMap.find(word)->second;
 
 	CQueryResult result(word, lines, m_allLineText);
-	
+
 
 	return result;
 }
@@ -109,7 +117,7 @@ int main()
 		cout << "can't open file " << file << endl;
 		return -1;
 	}
-	//¶ÁÈ¡ÎÄ¼şÄÚÈİ£¬ÔÚÄÚ´æÖĞÉú³É½á¹¹»¯µÄ±ãÓÚ²éÕÒµÄÊı¾İ½á¹¹
+	//è¯»å–æ–‡ä»¶å†…å®¹ï¼Œåœ¨å†…å­˜ä¸­ç”Ÿæˆç»“æ„åŒ–çš„ä¾¿äºæŸ¥æ‰¾çš„æ•°æ®ç»“æ„
 	CTextQuery textQuery(fin);
 	CQueryResult queryResult = textQuery.query("second");
 	cout << queryResult << endl;
