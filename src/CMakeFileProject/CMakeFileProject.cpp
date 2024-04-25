@@ -4,8 +4,22 @@
 #include "CMakeFileProject.h"
 
 #include <fstream>
-
+#include <string>
 using namespace std;
+
+void getlineDemo()
+{
+	string line;
+
+	//打开文件data.txt
+	ifstream fin("data.txt");
+
+	//从文件fin读取一行数据到line中
+	getline(fin, line);
+
+	//输出读取到的内容
+	cout << line << endl;
+}
 
 int ofstreamDemo()
 {
@@ -29,6 +43,8 @@ int ofstreamDemo()
 int main(void)
 {
 	ofstreamDemo();
+
+	getlineDemo();
 
 	//打开文件out.txt
 	ifstream fin("data.txt");
