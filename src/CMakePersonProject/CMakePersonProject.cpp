@@ -35,12 +35,7 @@ istream& operator>>(istream& is, Person& person)
     //(1) your code 
     // 使用输入操作符重载，将流中的数据，提取赋值给person对象的成员变量中
     //see https://zhuanlan.zhihu.com/p/412724745
-    string lineText;
-    while (getline(is, lineText))
-    {
-        istringstream iss(lineText);
-        iss >> person.m_id >> person.m_name >> person.m_tel;
-    }
+    is >> person.m_id >> person.m_name >> person.m_tel;
     return is;
 }
 
@@ -73,7 +68,8 @@ bool PersonManager::DeletePerson(void)
             //(2) your code
             // 容器的erase方法支持删除容器的元素时，传入指向元素的迭代器
             //see https://zhuanlan.zhihu.com/p/441293600
-
+            m_allPerson.erase(itr);
+            return true;
         }
     }
     return false;
@@ -93,7 +89,9 @@ bool PersonManager::QueryPersonByName() const
             //(3) your code
             //see https://zhuanlan.zhihu.com/p/376440190
             //see https://zhuanlan.zhihu.com/p/376446724
+            cout << *itr ;
 
+            return true;
         }
     }
     cout << "not found " << name << endl;
@@ -112,7 +110,7 @@ bool PersonManager::QueryPersonByTel() const
             //(4) your code
             //see https://zhuanlan.zhihu.com/p/376440190
             //see https://zhuanlan.zhihu.com/p/376446724
-
+            cout << *itr;
         }
     }
     cout << "not found " << tel << endl;
@@ -136,6 +134,8 @@ bool PersonManager::SaveAllPersonToFile(void) const
     {
         //(5) your code 
         //see https://zhuanlan.zhihu.com/p/262508774
+
+        fout << *itr << endl;
 
     }
     return true;
