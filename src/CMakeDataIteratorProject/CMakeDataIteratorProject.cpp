@@ -199,9 +199,9 @@ private:
     void clear(void);
 private:
     //(0) your code 请给下面的三个成员变量定义的同时初始化，这样就不用在每个构造函数里都再初始化一遍了 C++11
-    size_t m_size;//当前元素数量
-    size_t m_capacity;//容量
-    int* m_data;//数据部分
+    size_t m_size = 0;//当前元素数量
+    size_t m_capacity = 0;//容量
+    int* m_data = nullptr;//数据部分
 };
 Vector::Vector(void)
 {
@@ -314,7 +314,7 @@ Vector::const_iterator Vector::begin() const noexcept
     }
     const_iterator itr;
     //(1) your code 下面的代码仅仅是让编译通过，可能需要你重新实现。如需修改itr的成员，考虑到Vector是iterator类的友元，可以直接修改。
- 
+    itr.m_hold = &m_data[0];
  
     return itr;
 }
@@ -327,7 +327,7 @@ Vector::iterator Vector::begin() noexcept
     }
     iterator itr;
     //(1) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
- 
+    itr.m_hold = &m_data[0];
  
     return itr;
 }
@@ -337,7 +337,7 @@ Vector::const_iterator Vector::end() const noexcept
     const_iterator itr;
     //(2) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
     // 如果容器为空，不能返回下标返回的元素位置
- 
+    itr.m_hold = &m_data[m_size];
  
     return itr;
 }
@@ -347,7 +347,7 @@ Vector::iterator Vector::end() noexcept
     iterator itr;
     //(2) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
     // 如果容器为空，不能返回下标返回的元素位置
- 
+    itr.m_hold = &m_data[m_size];
  
     return itr;
 }
@@ -355,51 +355,49 @@ Vector::iterator Vector::end() noexcept
 void Vector::clear(void)
 {
     //(3) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
- 
- 
- 
- 
+    if (m_size > 0) {
+        delete[] m_data;
+        m_data = nullptr;
+        m_capacity = 0;
+        m_size = 0;
+    }
  
 }
  
 bool operator==(const Vector::iterator& lhs, const Vector::iterator& rhs)
 {
     //(4) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
-    cout << "test code " << lhs.m_hold << ", test code " << rhs.m_hold << endl;//请删除这行代码
-    return false;
+    return lhs.m_hold == rhs.m_hold;;
 }
  
 bool operator!=(const Vector::iterator& lhs, const Vector::iterator& rhs)
 {
     //(5) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
-    cout << "test code " << lhs.m_hold << ", test code " << rhs.m_hold << endl;//请删除这行代码
-    return false;
+    return !(lhs == rhs);
 }
  
 Vector::iterator& Vector::iterator::operator++()
 {
     //(6) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
- 
+    m_hold++;
     return *this;
 }
 Vector::const_iterator& Vector::const_iterator::operator++()
 {
     //(7) your code 下面的代码仅仅是让编译通过，可能需要你重新实现
- 
+    m_hold++;
  
     return *this;
 }
 int& Vector::iterator::operator*()
 {
     //(9) your code 下面的代码是错误的！不可以返回临时变量的引用！仅仅是让编译通过，需要你重新实现
-    static int a = 0;//请删除这行代码
-    return a;
+    return *m_hold;
 }
 const int& Vector::const_iterator::operator*() const
 {
     //(9) your code 下面的代码是错误的！不可以返回临时变量的引用！仅仅是让编译通过，需要你重新实现
-    static int a = 0;//请删除这行代码
-    return a;
+    return *m_hold;
 }
 
 void Vector::push_back(const int& value)
@@ -407,16 +405,18 @@ void Vector::push_back(const int& value)
     //如果capacity为0，则一次性开辟10个元素
     if (m_capacity == 0)
     {
-
-
-
+        m_data = new int[10];
+        m_data[0] = value;
+        m_capacity = 10;
+        m_size = 1;
     }
     else if (m_size < m_capacity)
     {
         //给最后一个元素的后面赋值为新元素value
         //增加元素数量
         //(5) your code
-
+        m_data[m_size] = value;
+        ++m_size;
     }
     else
     {
@@ -426,29 +426,30 @@ void Vector::push_back(const int& value)
         for (int j = 0; j < m_size; j++)
         {
             //(5.1) your code
-
+            p[j] = m_data[j];
 
         }
         //把新添加的元素也添加到新地方
         //(6) your code
- 
+        p[m_size] = value;
 
 
         //记得元素数量加1
         //(7) your code
+        ++m_size;
 
 
         //容量翻倍
         //(8) your code
-
+        m_capacity = 2 * m_capacity;
 
         //释放原来的内存
         //(9) your code
-
+        delete[] m_data;
 
         //成员变量接管新开普的内存
         //(10) your code
-
+        m_data = p;
 
     }
 }

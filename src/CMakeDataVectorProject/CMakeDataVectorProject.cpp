@@ -280,7 +280,7 @@ void Vector::clear()
 {
     //(11) your code 参考 清空元素部分的介绍；如果原来已经有容量了，需要先释放原来的空间；
     if (m_size > 0) {
-        delete m_data;
+        delete[] m_data;
         m_data = nullptr;
         m_capacity = 0;
         m_size = 0;
