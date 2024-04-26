@@ -47,7 +47,8 @@ public:
 	{
 		//返回 坐标(i,j)处是否是有蛇的食物可以吃
 		//(8) your code
-		return false;//wrong! you have to change it.
+
+		return m_playBoard[row][col] == static_cast<char>(MatrixValueEnum::FOOD);
 	}
 	void IncreaseOnlyBody(pair<int, int> nextPosition)
 	{
@@ -65,11 +66,17 @@ public:
 		// 比如超出了游戏界面（下标越界）
 		// 比如撞到了蛇的身体
 		//(5) your code ： row out of range, col out of range, snake body ahead
-		return
+		size_t row = m_playBoard.size();
+		size_t col = m_playBoard.at(0).size();
+		if (go_to_row >= row || go_to_col >= col || go_to_row < 0 || go_to_col < 0)
+		{
+			return true;
+		}
+		else if (m_playBoard[go_to_row][go_to_col] == static_cast<char>(MatrixValueEnum::SNAKE_BODY)) {
+			return true;
+		}
 
-			false
-
-			;
+		return false;
 	}
 	// 计算蛇的头移动一次后的新坐标
 	std::pair<int, int> GetNextPosition(int step_row, int step_column) const
@@ -77,8 +84,8 @@ public:
 		//根据蛇的头的位置，以及一个移动的向量 (i,j) 得到蛇头部打算要去的新目的地的坐标
 		auto oldPosition = GetCurrentPosition();
 		//(7) your code
-		auto newRow = -1;//wrong! you have to change it.
-		auto newColumn = -1;//wrong! you have to change it.
+		auto newRow = oldPosition.first + step_row;
+		auto newColumn = oldPosition.second + step_column;
 		return std::make_pair(newRow, newColumn);
 	}
 	// 获取蛇的头的坐标
@@ -86,7 +93,7 @@ public:
 	{
 		//返回蛇 的头的坐标，是m_snakeBody的第一个元素的值
 		//（6） your code : snake body 's front element
-		auto front = pair<int, int>(-1, -1);//wrong! you have to change it.
+		auto front = m_snakeBody.front();
 		return front;
 	}
 	void MoveOneStepTo(pair<int, int> nextPosition)
@@ -116,16 +123,15 @@ public:
 			//随机数的用法：https://blog.csdn.net/calmreason/article/details/72655060
 			//(9) your code
 			int row = g() % GetRow();
-			int col = -1;//wrong! you have to change it.
+			int col = g() % GetCol();
 
 			// 在新坐标处放置一个食物，记得检查可以放才能放
 			// 一旦放好，记得退出循环，让程序继续执行
 			//(10) your code : push food at row, col. if ok , break this loop.
-
-
-
-
-
+			if (m_playBoard[row][col] != static_cast<char>(MatrixValueEnum::SNAKE_BODY)) {
+				PushFoodAt(row, col);
+				break;
+			}
 		} while (true);
 	}
 	//this function help your find bug easyly
@@ -276,9 +282,9 @@ public:
 		{
 			// (11) your code
 			// EatFood at nextPosition
-
+			m_model.EatFood(nextPosition);
 			// create one food use CreateFood
-
+			m_model.CreateFood();
 
 		}
 		// 如果 nextPosition 处没有食物，就移动蛇的身体
@@ -286,7 +292,7 @@ public:
 		{
 			// (12) your code 
 			// MoveOneStepTo nextPosition
-
+			m_model.MoveOneStepTo(nextPosition);
 		}
 
 		return true;
