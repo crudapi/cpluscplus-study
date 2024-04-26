@@ -1,0 +1,115 @@
+Vector(void)
+Vector(void)
+line:575 Pass
+line:576 Pass
+Vector(4, int)
+line:578 Pass
+line:579 Pass
+line:580 Pass
+Vector(void)
+Vector::deep_copy_from Vector<int>
+Vector::deep_copy_from Vector<int>
+line:587 Pass
+line:588 Pass
+line:589 Pass
+line:590 Pass
+line:591 Pass
+Vector(T* start, T* end)
+line:305 Pass
+line:307 Pass
+line:595 Pass
+line:596 Pass
+line:597 Pass
+line:598 Pass
+The contents of fifth are: 16 2 77 29
+line:601 Pass
+line:602 Pass
+The contents of fifth are: 16 2 77 29 30
+line:604 Pass
+Vector::operator=Vector<int>
+Vector::operator=Vector<int>
+Vector::deep_copy_from Vector<int>
+The contents of first are: 16 2 77 29 30
+line:607 Pass
+The contents of fifth are: 16 2 77 29 30
+The contents of fifth are: 16 2 77 29 30
+line:614 Pass
+Vector(void)
+Vector(void)
+line:617 Pass
+fifith after sort:
+The contents of fifth are: 2 16 29 30 77
+Vector(T* start, T* end)
+line:305 Pass
+line:307 Pass
+Vector::deep_copy_from Vector<int>
+line:625 Pass
+line:627 Pass
+line:631 Pass
+line:634 Pass
+line:635 Pass
+line:639 Pass
+line:642 Pass
+line:643 Pass
+line:644 Pass
+Vector(void)
+line:648 Pass
+line:649 Pass
+Vector(void)
+Vector::operator=Vector<int>
+Vector::deep_copy_from Vector<int>
+16 2 77 29
+line:663 Pass
+Vector(void)
+Vector::operator=Vector<int>
+Vector::deep_copy_from Vector<int>
+line:668 Pass
+line:673 Pass
+Vector::deep_copy_from Vector<int>
+line:676 Pass
+Vector::operator=Vector<int>
+Vector::deep_copy_from Vector<int>
+line:678 Pass
+Vector(10, char)
+line:689 Pass
+Vector(1, char)
+Vector(1, class Vector<char>)
+Vector(void)
+Vector::operator=Vector<char>
+Vector::deep_copy_from Vector<char>
+line:533 Pass
+line:700 Pass
+line:702 Pass
+line:704 Pass
+line:705 Pass
+Vector(void)
+line:544 Pass
+Vector(void)
+Student() address of this = 726469175124
+Student() address of this = 2580124172864
+Student() address of this = 2580124172868
+Student() address of this = 2580124172872
+Student() address of this = 2580124172876
+Student() address of this = 2580124172880
+Student() address of this = 2580124172884
+Student() address of this = 2580124172888
+Student() address of this = 2580124172892
+Student() address of this = 2580124172896
+Student() address of this = 2580124172900
+line:558 Pass
+line:560 Pass
+Student() address of this = 726469174964
+Vector(10, struct Student)
+Student() address of this = 2580124173536
+Student() address of this = 2580124173540
+Student() address of this = 2580124173544
+Student() address of this = 2580124173548
+Student() address of this = 2580124173552
+Student() address of this = 2580124173556
+Student() address of this = 2580124173560
+Student() address of this = 2580124173564
+Student() address of this = 2580124173568
+Student() address of this = 2580124173572
+line:567 Pass
+OK good job ! No memory leak.
+2024-04-26 18:58:42 Friday
