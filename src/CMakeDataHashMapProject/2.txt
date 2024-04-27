@@ -79,8 +79,10 @@ HashMap::operator=(const HashMap & from)
 line:424 Pass
 line:425 Pass
 line:426 Pass
+assignment......
 ~HashMap()
 ~HashMap()
+iterator......
 HashMap()
 HashMap()
 ~HashMap()
@@ -90,7 +92,7 @@ HashMap()
 ~HashMap()
 HashMap()
 ~HashMap()
-line:438 Pass
+line:440 Pass
 1 zhangsan1
 2 zhangsan2
 3 zhangsan3
@@ -141,7 +143,7 @@ line:438 Pass
 48 zhangsan48
 49 zhangsan49
 50 zhangsan50
-line:450 Pass
+line:452 Pass
 HashMap()
 ~HashMap()
 HashMap()
@@ -150,11 +152,12 @@ HashMap()
 ~HashMap()
 HashMap()
 ~HashMap()
-line:456 Pass
-line:457 Pass
 line:458 Pass
 line:459 Pass
 line:460 Pass
+line:461 Pass
+line:462 Pass
+iterator......
 ~HashMap()
 Memory leak report:
 No memory leak.

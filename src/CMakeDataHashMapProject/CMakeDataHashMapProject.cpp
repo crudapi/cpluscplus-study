@@ -162,7 +162,7 @@ std::string& HashMap::operator[](const int& key)
     if (itr.m_itr == bucket.end())
     {
         //(6) your code. key not exist, insert empty std::string as default value at end of this bucket
-        value_type value(key, "");
+        value_type value(key, std::string());
         bucket.push_back(value);
 
         //(7) your code. increase the size of current hash map.
@@ -424,7 +424,9 @@ int main()
         check(students2.contains(id));
         check(students2.contains(456));
         check(students.size() == 2);
+        cout << "assignment......" << endl;
     }
+    cout << "iterator......" << endl;
     //iterator
     const int total = 50;
     {
@@ -458,5 +460,7 @@ int main()
         check(students[1] == "1");
         check(students[total] == to_string(total));
         check(students.size() == total);
+        cout << "iterator......" << endl;
     }
+    
 }
