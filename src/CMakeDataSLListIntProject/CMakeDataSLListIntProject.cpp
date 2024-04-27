@@ -263,7 +263,7 @@ void SLListInt::print(std::ostream& out)
     {
         out << p->m_data << " ";
         //(1) your code.  move p to next node
-
+        p = p->m_next;
     }
     out << std::endl;
 }
@@ -273,15 +273,16 @@ void SLListInt::push_front(const int& t)
     if (empty())
     {
         //(2) your code. use push_back
-        
+        push_back(t);
     }
     else
     {
         auto p = new SLNode(t);
         //(3) update m_head, m_size
     
-    
-    
+        p->m_next = m_head;
+        m_head = p;
+        ++m_size;
     }
 }
 
@@ -291,7 +292,9 @@ void SLListInt::push_back(const int& t)
     if (empty())
     {
         //(4) your code. update m_head, m_tail
-    
+        m_tail = new SLNode(t);
+        m_head = m_tail;
+        m_tail->m_next = nullptr;
     }
     else
     {
@@ -300,7 +303,7 @@ void SLListInt::push_back(const int& t)
         m_tail = m_tail->m_next;
     }
     //(6) your code. update m_size
-
+    ++m_size;
 }
 
 void SLListInt::pop_back(void)
@@ -310,17 +313,19 @@ void SLListInt::pop_back(void)
     if (size() == 1)
     {
         //(7) your code. destroy the node. update m_head, m_tail
-
-
-
+        delete m_head;
+        m_head = nullptr;
+        m_tail = nullptr;
     }
     else
     {
         auto p = m_head;
         //(8) your code. 找到被删除节点的前一个节点（前驱节点），才能删除被删除节点
         //use loop to find prev node
-
-
+        while (p->m_next->m_next != nullptr) {
+            p = p->m_next;
+            break;
+        }
 
         //当 p->next->next == nullptr 时，说明我找到了前驱节点 
         //delete p->next 删除 前驱节点的后一个节点
@@ -328,11 +333,11 @@ void SLListInt::pop_back(void)
         p->m_next = nullptr;
         //update m_tail
         //(9) your code.
-
+        m_tail = p;
     }
     //1 2 3 4 5 6 more than one element
     //(6) your code. update m_size
-
+    --m_size;
 }
 
 void SLListInt::pop_front(void)
@@ -344,15 +349,16 @@ void SLListInt::pop_front(void)
     auto next = m_head->m_next;
     auto front = m_head;
     //(10) your code. update the m_head
-
+    m_head = next;
     //(11) your code. destroy the node
-
+    delete front;
     --m_size;
 
     if (m_size == 0)
     {
         //(12) your code. update the m_head, m_tail
-    
+        m_head = nullptr;
+        m_tail = nullptr;
     }
 }
 
@@ -400,10 +406,10 @@ bool SLListInt::exist(const int& e)
         if (p->m_data == e)
         {
             //(13) your code. return directly.
-        
+            return true;
         }
         //(13) your code. update p
-    
+        p = p->m_next;
     }
     return false;
 }
@@ -412,8 +418,9 @@ void SLListInt::clear(void)
 {
     //(14) your code. use empty() + pop_front() to impliment this function
     
-
-
+    while (!empty()) {
+        pop_front();
+    }
 
 }
 SLListInt::SLNode* SLListInt::find_first_for_erase(const int& value)
@@ -427,7 +434,8 @@ SLListInt::SLNode* SLListInt::find_first_for_erase(const int& value)
             return prev;
         }
         //(15)your code. update prev and p
-    
+        prev = p;
+        p = p->m_next;
     
     }
     return nullptr;
@@ -445,7 +453,7 @@ void SLListInt::erase_first(int value)
     if (value == m_head->m_data)//第一个节点就是要删除的节点，直接删除
     {
         //(16)your code. use pop_front() to erase
-    
+        pop_front();
     }
     else
     {
@@ -465,12 +473,12 @@ void SLListInt::erase_first(int value)
 void SLListInt::copy(const SLListInt& from)
 {
     //(17)your code. use clear(), push_back() to implement this function.
-    
+    clear();
     //p is used to iterator the list object from
     auto p = from.m_head;
     for (int i = 0; i < from.m_size; i++)
     {
-        
+        push_back(p->m_data);
         p = p->m_next;
     }
 }
