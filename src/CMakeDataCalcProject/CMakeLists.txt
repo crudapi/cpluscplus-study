@@ -12,7 +12,7 @@ endif()
 project ("CMakeDataCalcProject")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (CMakeDataCalcProject "CMakeDataCalcProject.cpp" "CMakeDataCalcProject.h")
+add_executable (CMakeDataCalcProject "CMakeDataCalcProject.cpp" "CMakeDataCalcProject.h" "Stackitem.h" "Stack.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CMakeDataCalcProject PROPERTY CXX_STANDARD 20)
