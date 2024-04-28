@@ -121,12 +121,16 @@ binary_search_tree<T>::binary_search_tree(const T* arr, const int length) : bina
 {
     //(4) your code 
     //可以使用成员函数insert(const T& data) 来实现这个函数
+    for (int i = 0; i < length; ++i) {
+        insert(*(arr + i));
+    }
 }
 template<typename T>
 binary_search_tree<T>::binary_search_tree(const binary_search_tree & from) :m_root(nullptr)
 {
     //(5) your code 
     //可以使用成员函数copy来实现
+    copy(from);
 }
 template<typename T>
 binary_search_tree<T>& binary_search_tree<T>::operator=(const binary_search_tree & from)
@@ -134,8 +138,8 @@ binary_search_tree<T>& binary_search_tree<T>::operator=(const binary_search_tree
     //(5) your code 
     //可以使用成员函数copy来实现。
     //从这里可以看出copy函数应该先用clear成员函数清空自己原有的全部节点
- 
- 
+    copy(from);
+
     return *this;
 }
 template<typename T>
@@ -214,9 +218,18 @@ int binary_search_tree<T>::height(const tree_node* _t) const
     //(7) your code 如果没有元素，返回0
     // 如果只有一个根节点，没有孩子节点高度为1
     // 如果有孩子节点，树的高度就 = 1 + 孩子节点的高度（左右子树高度较大的那一个）
+    if (_t == nullptr) 
+    {
+        return 0;
+    }
+    else if (is_node_leaf(_t))
+    {
+        return 1;
+    }
+    else {
+        return  std::max<int>(height(_t->left), height(_t->right)) + 1;
+    }
  
- 
-    return -1;
 }
 template<typename T>
 bool binary_search_tree<T>::operator==(const binary_search_tree & other) const
@@ -232,14 +245,23 @@ template<typename T>
 bool binary_search_tree<T>::equal(const tree_node* lhs, const tree_node* rhs) const
 {
     // 先判断两个树是否为空
+    if (lhs == nullptr && rhs == nullptr)
+    {
+        return true;
+    } 
+    else if (lhs == nullptr || rhs == nullptr) {
+        return false;
+    }
+
  
     //再判断两个树是否都是叶子节点  可以使用 is_leaf_node_equal 成员函数
- 
+    if (is_node_leaf(lhs) && is_node_leaf(rhs)) {
+        return is_leaf_node_equal(lhs, rhs);
+    }
+
     //再判断两个树的两个左右子树是否同时相等  可以递归调用当前equal函数
- 
-    //(8) your code
- 
-    return false;
+    return equal(lhs->left, rhs->left) && equal(lhs->right, rhs->right);
+
 }
 template<typename T>
 bool binary_search_tree<T>::is_leaf_node_equal(const tree_node* lhs
@@ -260,6 +282,7 @@ bool binary_search_tree<T>::is_node_leaf(const tree_node * node) const
  
 template<typename T>
 // dest需要被创建的节点, dest_parent 需要被创建的节点的父亲节点
+//copy_node_from(m_root/*需要被创建的节点*/, nullptr/*需要被创建的节点的父节点：用户指向孩子*/, other.m_root/*提供节点存储的数据*/);
 void binary_search_tree<T>::copy_node_from(tree_node *& dest, tree_node* dest_parent, const tree_node * from)
 {
     //(9) your code 深度拷贝from节点，并切递归拷贝，从而完成整棵树的拷贝
@@ -267,7 +290,16 @@ void binary_search_tree<T>::copy_node_from(tree_node *& dest, tree_node* dest_pa
     //注意dest节点传递的是引用，这意味着你可以非常方便的对这个地址变量赋值，赋值就会修改传进来的外部变量
  
     //改函数使用递归调用自己的方式，完成整棵树的拷贝。注意对左子树和又子树可能需要分别调用一次递归函数才能完成。
- 
+    dest = new tree_node(from->data);
+    dest->parent = dest_parent;
+
+    if (from->left != nullptr) {
+        copy_node_from(dest->left, dest, from->left);
+    }
+    
+    if (from->right != nullptr) {
+        copy_node_from(dest->right, dest, from->right);
+    }
 }
  
 template<typename T>
@@ -303,10 +335,37 @@ int binary_search_tree<T>::max_length_between_node(void) const
 template<typename T>
 void binary_search_tree<T>::clear(void)
 {
+    if (m_root == nullptr) {
+        return;
+    }
     //使用一个辅助队列(或者栈)，层次遍历删除所有节点。
     //遍历到一个节点A就把孩子BC放到队列，并把这个节点A从队列里取出释放
     //(10) your code
- 
+    const tree_node* ptree = m_root;
+
+    list<tree_node*> listNode;
+
+    listNode.push_back(m_root);
+
+    while (!listNode.empty())
+    {
+        auto pnode = listNode.front();
+        listNode.pop_front();
+
+        if (pnode->left != nullptr)
+        {
+            listNode.push_back(pnode->left);
+        }
+        if (pnode->right != nullptr)
+        {
+            listNode.push_back(pnode->right);
+        }
+
+        delete pnode;
+    }
+
+    m_size = 0;
+    m_root = nullptr;
  
 }
 template<typename T>
@@ -484,6 +543,24 @@ template<typename T>
 typename binary_search_tree<T>::tree_node* binary_search_tree<T>::find(const T& data)
 {
     //(11) your code 利用find，非递归实现：查找某个值是否存在于树中
+    if (m_root)
+    {
+        tree_node* pfind = m_root;
+        while (pfind)
+        {
+            if (pfind->data == data)
+            {
+                return pfind;
+                break;
+            }
+            else if (data < pfind->data)
+            {
+                pfind = pfind->left;
+            }
+            else
+                pfind = pfind->right;
+        }
+    }
     return nullptr;
 }
  
@@ -496,25 +573,42 @@ template<typename T>
 T binary_search_tree<T>::minmum(void) const
 {
     //(12) your code 返回最小值 ，请使用成员函数 minmum(tree_node* p) const  来实现
-    return T();
+    return minmum(m_root)->data;
 }
 template<typename T>
 typename binary_search_tree<T>::tree_node* binary_search_tree<T>::minmum(tree_node* p) const
 {
     //(13) your code 返回最小值：非递归实现
-    return nullptr;
+    if (p == nullptr) {
+        return nullptr;
+    }
+    tree_node* t = p;
+    while (t != nullptr && t->left != nullptr)
+    {
+        t = t->left;
+    } 
+
+    return t;
 }
 template<typename T>
 T binary_search_tree<T>::maxmum(void) const
 {
     //(14) your code 返回最大值 ，请使用成员函数 maxmum(tree_node* p) const  来实现
-    return T();
+    return maxmum(m_root)->data;
 }
 template<typename T>
 typename binary_search_tree<T>::tree_node* binary_search_tree<T>::maxmum(tree_node* t) const
 {
     //(14) your code 返回最大值：非递归实现
-    return nullptr;
+    if (t == nullptr) {
+        return nullptr;
+    }
+    tree_node* p = t;
+    while (p != nullptr && p->right != nullptr)
+    {
+        p = p->right;
+    }
+    return p;
 }
 template<typename T>
 typename binary_search_tree<T>::tree_node* binary_search_tree<T>::successor(tree_node* t) const
@@ -523,9 +617,27 @@ typename binary_search_tree<T>::tree_node* binary_search_tree<T>::successor(tree
     //具体思路为，如果这个节点有右子树，那么右子树的minmum节点就是后继结点。
     //如果，这个节点没有右子树，比该节点大的值，一定是往右上方去的第一个节点。
     //参考《算法导论》
+    if (t == nullptr) {
+        return nullptr;
+    }
+
+    if (t->right != nullptr) {
+        return minmum(t->right);
+    }
+
+    tree_node* fast = t->parent;
+    tree_node* slow = t;
+    while (fast != nullptr) 
+    {
+        if (fast->left == slow) {
+            break;
+        }
+
+        slow = fast;
+        fast = fast->parent;
+    }
  
- 
-    return nullptr;
+    return fast;
 }
 template<typename T>
 void binary_search_tree<T>::print_element_order(void) const
@@ -535,7 +647,12 @@ void binary_search_tree<T>::print_element_order(void) const
     {
         //(16) your code 使用后继节点成员函数作为顺序迭代的依据，实现顺序遍历一颗二次函数。
         //循环获取后继，只要有后继，就输出这个后继。
- 
+        tree_node* t = successor(m_root);
+        while (t != nullptr) {
+            cout << t->data;
+
+            t = successor(t);
+        }
  
         cout << endl;
     }
