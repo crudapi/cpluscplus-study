@@ -195,16 +195,16 @@ private:
         {
             check(m_count == 1);
         }
-        void add_count(void) { /*(4) your code. increase shared count*/ }
-        void decrease_count(void) { /*(5) your code. decrease shared count.*/ }
+        void add_count(void) { ++m_count; /*(4) your code. increase shared count*/ }
+        void decrease_count(void) { --m_count; /*(5) your code. decrease shared count.*/ }
         long count(void) const { return m_count; }
-        bool have_to_delete(void) const {/*(6) Re-implement this function*/ return false; }
+        bool have_to_delete(void) const {/*(6) Re-implement this function*/ return m_count == 0; }
     private:
-        long m_count;//(2) your code. in this line you should initialize member m_count
+        long m_count = 1;//(2) your code. in this line you should initialize member m_count
     };
 
 private:
-    T* m_ptr;//(1) your code. in this line you should initialize member m_ptr
+    T* m_ptr = nullptr;//(1) your code. in this line you should initialize member m_ptr
     share_count* m_share_count;
 };
 template<class T>
@@ -219,6 +219,8 @@ my_shared_ptr<T>::my_shared_ptr(T* t)
 //(3) your code. implement the initialize list to init m_shared_count and m_ptr
 
 {
+    m_ptr = t;
+    m_share_count = new share_count;
 }
 
 template<class T>
@@ -285,7 +287,7 @@ void my_shared_ptr<T>::decrease(void)
     //(7) your code.
     // case 1 : decrease the shared count first
     
-
+    m_share_count->decrease_count();
 
 
     // case 2 : if have to delete , do delete. 
@@ -293,13 +295,20 @@ void my_shared_ptr<T>::decrease(void)
     {
         //(8) your code.
         //do delete the object held.
-
+        if (m_ptr != nullptr) {
+            delete m_ptr;
+            m_ptr = nullptr;
+        }
+       
 
 
 
         //(9) your code.
         //remember delete shared count object here
-
+        if (m_share_count != nullptr) {
+            delete m_share_count;
+            m_share_count = nullptr;
+        }
 
     }
 }
@@ -309,9 +318,11 @@ void my_shared_ptr<T>::copy(const my_shared_ptr& from)
 {
     //10 your code. shared the m_ptr and m_shared_count. and then increase the shared count.
 
+    m_ptr = from.m_ptr;
 
+    m_share_count = from.m_share_count;
 
-
+    m_share_count->add_count();
 }
 
 class A
