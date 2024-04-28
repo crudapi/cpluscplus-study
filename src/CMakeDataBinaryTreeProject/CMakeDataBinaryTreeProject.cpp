@@ -1,9 +1,4 @@
-﻿// CMakeDataBinaryTreeProject.cpp: 定义应用程序的入口点。
-//
-
-#include "CMakeDataBinaryTreeProject.h"
-
-#pragma once
+﻿#pragma once
 #include <algorithm>
 #include <list>
 #include <iostream>
@@ -16,7 +11,6 @@
 #include <map>
 #include <sstream>
 using namespace std;
- 
 //------下面的代码是用来测试你的代码有没有问题的辅助代码，你无需关注------
 #include <algorithm>
 #include <cstdlib>
@@ -621,6 +615,7 @@ typename binary_search_tree<T>::tree_node* binary_search_tree<T>::successor(tree
         return nullptr;
     }
 
+
     if (t->right != nullptr) {
         return minmum(t->right);
     }
@@ -647,9 +642,9 @@ void binary_search_tree<T>::print_element_order(void) const
     {
         //(16) your code 使用后继节点成员函数作为顺序迭代的依据，实现顺序遍历一颗二次函数。
         //循环获取后继，只要有后继，就输出这个后继。
-        tree_node* t = successor(m_root);
+        tree_node* t = minmum(m_root);
         while (t != nullptr) {
-            cout << t->data;
+            cout << t->data << " ";
 
             t = successor(t);
         }
@@ -716,6 +711,7 @@ void binary_search_tree<T>::erase_node(tree_node*& pnode)
         pnode->data = psuccessor->data;//3 让y的值覆盖z的值。
         //2 删除y, y只有一个孩子，只有一个孩子的节点删除此函数的开始部分已经实现了。只需要调用此函数即可。
         //(17) your code
+        erase_node(psuccessor);
     }
 }
 template<typename T>
