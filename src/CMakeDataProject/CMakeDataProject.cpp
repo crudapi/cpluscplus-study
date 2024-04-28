@@ -13,6 +13,7 @@ struct AutoPtr
     }
     ~AutoPtr()
     {
+        cout << "autoPtr" << endl;
         delete m_p;
     }
     int* m_p = nullptr;
@@ -23,5 +24,7 @@ int main()
     AutoPtr ptr(new int(123));
     cout << *ptr.m_p << endl;
 
-    return 0;
+    auto ptr2 = ptr;//浅拷贝，哦吼！！两个对象会释放两次同一个地址
+    cout << *ptr2.m_p << endl;
+
 }
