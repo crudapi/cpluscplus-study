@@ -150,7 +150,9 @@ bool HashMap::contains(const int& key)
 std::string& HashMap::operator[](const int& key)
 {
     //(5) your code 如果装载因子 大于了 0.8 就 re_hash 扩大容量
-    if (load_factor() > 0.8) {
+    double factor = load_factor();
+    if (factor > 0.8) {
+        //cout << "re_hash()" << factor << endl;
         re_hash();
     }
 
@@ -244,7 +246,7 @@ void HashMap::re_hash(void)
     HashMap re_hashmap;
     //将新的炉灶扩大容量
     //11 your code. 将新的炉灶实际的桶开辟出来
-    re_hashmap.m_bucket_array.resize(m_size * 2);
+    re_hashmap.m_bucket_array.resize(m_bucket_array.size() * 2);
 
     //使用迭代器，遍历原来的（this）所有元素，将所有元素拷贝到新的炉灶里
     for (auto itr = begin(); itr != end(); ++itr)
@@ -424,9 +426,7 @@ int main()
         check(students2.contains(id));
         check(students2.contains(456));
         check(students.size() == 2);
-        cout << "assignment......" << endl;
     }
-    cout << "iterator......" << endl;
     //iterator
     const int total = 50;
     {
@@ -460,7 +460,6 @@ int main()
         check(students[1] == "1");
         check(students[total] == to_string(total));
         check(students.size() == total);
-        cout << "iterator......" << endl;
     }
     
 }
