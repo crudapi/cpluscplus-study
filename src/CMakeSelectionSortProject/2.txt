@@ -1,0 +1,54 @@
+original array: 1
+one trip 1
+after sorted: 1
+
+original array: 1 2
+one trip 1 2
+one trip 1 2
+after sorted: 1 2
+
+original array: 2 1
+one trip 1 2
+one trip 1 2
+after sorted: 1 2
+
+original array: 2 2
+one trip 2 2
+one trip 2 2
+after sorted: 2 2
+
+original array: 42 20 17 13 28 14 23 15
+one trip 13 20 17 42 28 14 23 15
+one trip 13 14 17 42 28 20 23 15
+one trip 13 14 15 42 28 20 23 17
+one trip 13 14 15 17 28 20 23 42
+one trip 13 14 15 17 20 28 23 42
+one trip 13 14 15 17 20 23 28 42
+one trip 13 14 15 17 20 23 28 42
+one trip 13 14 15 17 20 23 28 42
+after sorted: 13 14 15 17 20 23 28 42
+
+original array: 1 8 3 6 5 4 7 2 9
+one trip 1 8 3 6 5 4 7 2 9
+one trip 1 2 3 6 5 4 7 8 9
+one trip 1 2 3 6 5 4 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+one trip 1 2 3 4 5 6 7 8 9
+after sorted: 1 2 3 4 5 6 7 8 9
+
+original array: 8 8 6 6 7 5 5 7 9 9
+one trip 5 8 6 6 7 8 5 7 9 9
+one trip 5 5 6 6 7 8 8 7 9 9
+one trip 5 5 6 6 7 8 8 7 9 9
+one trip 5 5 6 6 7 8 8 7 9 9
+one trip 5 5 6 6 7 8 8 7 9 9
+one trip 5 5 6 6 7 7 8 8 9 9
+one trip 5 5 6 6 7 7 8 8 9 9
+one trip 5 5 6 6 7 7 8 8 9 9
+one trip 5 5 6 6 7 7 8 8 9 9
+one trip 5 5 6 6 7 7 8 8 9 9
+after sorted: 5 5 6 6 7 7 8 8 9 9
