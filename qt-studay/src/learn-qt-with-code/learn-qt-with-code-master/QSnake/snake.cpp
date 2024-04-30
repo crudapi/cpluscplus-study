@@ -213,14 +213,14 @@ void Model::ShowGame(QPainter &painter, int pictureSize) const
                 //qt window position https://zhuanlan.zhihu.com/p/666232727
                 //show snake head (snake_head.jpeg)
                 //(7) your code. load your picture resource in qrc file by pixmap
-                load_result = pixmap.load(":/snake_head.jpeg");
+                load_result = pixmap.load(":/she.png");
             }
             else if (element == static_cast<char>(MatrixValueEnum::FOOD))
             {
                 //show food( you should add food picture to qrc by yourself)
                 // https://zhuanlan.zhihu.com/p/662881605
                 //(7) your code.
-                load_result = pixmap.load(":/food.png");
+                load_result = pixmap.load(":/food2.png");
             }
             else if (element == static_cast<char>(MatrixValueEnum::NOTHING))
             {

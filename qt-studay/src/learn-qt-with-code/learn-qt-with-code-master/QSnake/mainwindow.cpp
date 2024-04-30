@@ -43,7 +43,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         //(3) your code. the player enter a key
         //, you have to update the game by call member function Play in Snake.
-
+        gameover = m_snake.Play('w');
 
         update();//this will tell Qt to call paintEvent.
         break;
@@ -51,21 +51,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Down :
     {
         //(3) your code.
-
+        gameover = m_snake.Play('s');
         update();
         break;
     }
     case Qt::Key_Left :
     {
         //(3) your code.
-
+        gameover = m_snake.Play('a');
         update();
         break;
     }
     case Qt::Key_Right :
     {
         //(3) your code.
-
+        gameover = m_snake.Play('d');
         update();
         break;
     }
@@ -74,9 +74,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         //(2) your code. use QMessageBox to tell the player the game is over.
         // https://zhuanlan.zhihu.com/p/671461612
-
-
-
+        QMessageBox messageBox;
+        messageBox.setWindowTitle(tr("game is over"));
+        messageBox.setText(tr("Do you really want to quit?"));
+        messageBox.setStandardButtons(QMessageBox::Yes);
+        if (messageBox.exec() == QMessageBox::Yes)
+            qApp->quit();
     }
 }
 

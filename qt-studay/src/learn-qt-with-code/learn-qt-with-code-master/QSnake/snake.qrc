@@ -4,5 +4,7 @@
         <file>snake_body.png</file>
         <file>grass.png</file>
         <file>food.png</file>
+        <file>food2.png</file>
+        <file>she.png</file>
     </qresource>
 </RCC>
