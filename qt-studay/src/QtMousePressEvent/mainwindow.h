@@ -22,5 +22,9 @@ private:
     // QWidget interface
 protected:
     void mousePressEvent(QMouseEvent *event);
+
+    // QWidget interface
+protected:
+    void keyPressEvent(QKeyEvent *event);
 };
 #endif // MAINWINDOW_H

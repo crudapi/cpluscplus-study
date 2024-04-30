@@ -24,3 +24,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     ui->label_mouse_position->setText(text);//设置label的内容，用于显示
     ui->label_mouse_position->adjustSize();//根据内容调整label的大小，以显示全部内容
 }
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Escape)
+    {
+        this->close();
+    }
+}
