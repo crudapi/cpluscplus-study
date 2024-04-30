@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <ctime>
 #include<QFont>
+#include <random>
 
 MainWindow::MainWindow(size_t haveToDrawCount, size_t drawStep, int square_side_length
                        , QWidget *parent)
@@ -20,7 +21,7 @@ MainWindow::MainWindow(size_t haveToDrawCount, size_t drawStep, int square_side_
     m_pTimer->start();
     connect(m_pTimer, &QTimer::timeout, this, &MainWindow::OnTimeOut);
     //(1) your code 使用resize 成员函数设置窗口的长和宽
-
+    resize(square_side_length, square_side_length);
 }
 
 MainWindow::~MainWindow()
@@ -91,7 +92,11 @@ void MainWindow::CreateRandomPoint(long long drawStep)
     {
         //(2) your code 获得一个范围在[0-500) 之间的整数x, y https://zhuanlan.zhihu.com/p/659439130
         //取值为0-1之间的随机数x, y
-
+        std::default_random_engine e;
+        std::uniform_real_distribution<double> u(-1.0, 1.0); // 左闭右闭区间，产生均匀分布的实数
+        e.seed(time(0));
+        double x = u(e);//取值为0-1之间的随机数
+        double y = u(e);
 
 
         QPoint point;
@@ -99,8 +104,10 @@ void MainWindow::CreateRandomPoint(long long drawStep)
         //将两个随机整数b1, b2作为point的x y值(请自行搜索QPoint的相关成员函数)
         //https://doc.qt.io/qt-6/qpoint.html
         //(3) your code
-
-
+        int w = m_square_side_length * x;
+        int h = m_square_side_length * y;
+        point.setX(w);
+        point.setY(h);
 
         m_pointList.push_back(point);
 

@@ -36,14 +36,18 @@ MainWindow::MainWindow(QWidget *parent)
     m_timer.start();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
 void MainWindow::moveSlot() {
     qDebug()<<"moveSlot";
     move(m_key);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    qDebug() << "keyPressEvent "<< event->key();
+
+    m_key = event->key();
+
+    this->move(event->key());
 }
 
 void MainWindow::move(int key)
@@ -102,15 +106,12 @@ void MainWindow::move(int key)
     }
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
+
+
+MainWindow::~MainWindow()
 {
-    qDebug() << "keyPressEvent "<< event->key();
-
-    m_key = event->key();
-
-    this->move(event->key());
+    delete ui;
 }
-
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
