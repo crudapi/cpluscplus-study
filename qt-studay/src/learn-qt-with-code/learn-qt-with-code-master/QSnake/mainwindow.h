@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "snake.h"
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,12 +20,18 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event);
 
+private slots:
+    void moveSlot();
     // QWidget interface
 protected:
     void paintEvent(QPaintEvent *event);
+    void move(int key);
+
 private:
     Ui::MainWindow *ui;
     Snake m_snake;
     int m_pictureSize = 200;
+    int m_key = -1;
+    QTimer m_timer;
 };
 #endif // MAINWINDOW_H

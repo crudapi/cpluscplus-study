@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QMessageBox>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,13 @@ MainWindow::MainWindow(QWidget *parent)
     int w = m_snake.GetCol() * m_pictureSize;
     int h = m_snake.GetRow() * m_pictureSize;
     setFixedSize(w,  h);
+
+
+    m_timer.setInterval(500);
+
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(moveSlot()));
+
+    m_timer.start();
 }
 
 MainWindow::~MainWindow()
@@ -33,11 +41,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void MainWindow::moveSlot() {
+    qDebug()<<"moveSlot";
+    move(m_key);
+}
+
+void MainWindow::move(int key)
 {
-    qDebug()<<"user pressed key "<<event->key();
+    qDebug()<<"move " << key;
+    if (key < 0) {
+        return;
+    }
+
+    qDebug()<<"user pressed key "<< key;
     bool gameover = false;
-    switch (event->key())
+
+    switch (key)
     {
     case Qt::Key_Up :
     {
@@ -81,6 +100,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if (messageBox.exec() == QMessageBox::Yes)
             qApp->quit();
     }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    qDebug() << "keyPressEvent "<< event->key();
+
+    m_key = event->key();
+
+    this->move(event->key());
 }
 
 

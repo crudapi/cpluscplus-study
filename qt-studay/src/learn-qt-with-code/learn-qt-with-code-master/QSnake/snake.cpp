@@ -207,7 +207,7 @@ void Model::ShowGame(QPainter &painter, int pictureSize) const
             bool load_result = false;
             int x = col * pictureSize;
             int y = row * pictureSize;
-            cout << x << ", " << y << endl;
+            //cout << x << ", " << y << endl;
             if (row == headPosition.first && col == headPosition.second)
             {
                 //qt window position https://zhuanlan.zhihu.com/p/666232727
