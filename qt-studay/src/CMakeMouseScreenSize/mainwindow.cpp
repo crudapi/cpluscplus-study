@@ -19,6 +19,9 @@ MainWindow::~MainWindow()
 
 inline void MainWindow::paintEvent(QPaintEvent* painter1)
 {
+    auto text = "mouse=" + std::to_string(m_mousePos.x() + 1) + "," + std::to_string(m_mousePos.y() + 1);
+
+    cout << "paintEvent" << text << endl;
     drawSize();
     drawMouse();
 }
@@ -26,21 +29,25 @@ inline void MainWindow::paintEvent(QPaintEvent* painter1)
 void MainWindow::mouseMoveEvent(QMouseEvent* event)
 {
     m_mousePos = event->pos();
+    auto text = "mouse=" + std::to_string(m_mousePos.x() + 1) + "," + std::to_string(m_mousePos.y() + 1);
+
+    cout << "mouseMoveEvent" << text << endl;
     update();//repaint
 }
 
 void MainWindow::drawMouse()
 {
     QPainter painter(this);
-    auto w = this->geometry().width();
     auto text = "mouse=" + std::to_string(m_mousePos.x() + 1) + "," + std::to_string(m_mousePos.y() + 1);
     painter.drawText(QPoint(10, 15), QString(text.c_str()));
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
+    cout << "keyPressEvent " << event->key() << endl;
     if (event->key() == Qt::Key_Escape)
     {
+        cout << "showNormal" << endl;
         showNormal();
     }
     update();//repaint
@@ -50,7 +57,7 @@ void MainWindow::drawSize(void)
 {
     int left = 10;
     int row = 40;
-    int row_height = 15;
+    int row_height = 80;
     int row_index = 1;
     QPainter painter(this);
     painter.drawText(QPoint(left, row), QString(("Window width=" + std::to_string(width())).c_str()));
