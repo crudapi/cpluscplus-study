@@ -13,16 +13,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     bool  load_result = false;
     //(4) your code. load data from data.txt file by Snake's member function LoadPlayDataFromFile
-
+    load_result = m_snake.LoadPlayDataFromFile("data.txt");
     assert(load_result);
 
     //(5) your code.  set window title with "Snake Game"
     //https://zhuanlan.zhihu.com/p/669799427
-
+    this->setWindowTitle(
+           QApplication::translate("toplevel", "Snake Game"));
     //(6) your code. set window size by the col number and row number in Snake object.
     //every pixmap size is the same : width * height = m_pictureSize * m_pictureSize
     //use setFixedSize()
-
+    int w = m_snake.GetCol() * m_pictureSize;
+    int h = m_snake.GetRow() * m_pictureSize;
+    setFixedSize(w,  h);
 }
 
 MainWindow::~MainWindow()
@@ -82,5 +85,5 @@ void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     //(1) your code. use Snake PrintMatrix to drew the game
-
+    m_snake.PrintMatrix(painter, m_pictureSize);
 }

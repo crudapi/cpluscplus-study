@@ -199,37 +199,41 @@ void Model::ShowGame(QPainter &painter, int pictureSize) const
     auto headPosition = m_snakeBody.front();
     for (size_t row = 0; row < m_playBoard.size(); row++)
     {
+
         for (size_t col = 0; col < m_playBoard[row].size(); col++)
         {
             auto element = m_playBoard[row][col];
             QPixmap pixmap;
             bool load_result = false;
+            int x = col * pictureSize;
+            int y = row * pictureSize;
+            cout << x << ", " << y << endl;
             if (row == headPosition.first && col == headPosition.second)
             {
                 //qt window position https://zhuanlan.zhihu.com/p/666232727
                 //show snake head (snake_head.jpeg)
                 //(7) your code. load your picture resource in qrc file by pixmap
-
+                load_result = pixmap.load(":/snake_head.jpeg");
             }
             else if (element == static_cast<char>(MatrixValueEnum::FOOD))
             {
                 //show food( you should add food picture to qrc by yourself)
                 // https://zhuanlan.zhihu.com/p/662881605
                 //(7) your code.
-
+                load_result = pixmap.load(":/food.png");
             }
             else if (element == static_cast<char>(MatrixValueEnum::NOTHING))
             {
                 //show nothing, that is grass.png which is in qrc already
                 //(7) your code.
-
+                load_result = pixmap.load(":/grass.png");
             }
             // snake body
             else if(element == static_cast<char>(MatrixValueEnum::SNAKE_BODY))
             {
                 //show snake_body.png which is in qrc already
                 //(7) your code.
-
+                load_result = pixmap.load(":/snake_body.png");
             }
             else
             {
@@ -239,7 +243,7 @@ void Model::ShowGame(QPainter &painter, int pictureSize) const
             //(8) your code. draw the picture in the wright position by
             // the painter's member function drawPixmap(x, y, w, h, pixmap)
             //you should give drawPixmap the right x, and y which is determined by col and row
-
+            painter.drawPixmap(x, y, pictureSize, pictureSize, pixmap);
 
         }
     }

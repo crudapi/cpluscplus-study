@@ -25,6 +25,6 @@ protected:
 private:
     Ui::MainWindow *ui;
     Snake m_snake;
-    int m_pictureSize = 100;
+    int m_pictureSize = 200;
 };
 #endif // MAINWINDOW_H

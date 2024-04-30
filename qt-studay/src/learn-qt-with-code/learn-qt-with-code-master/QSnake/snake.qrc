@@ -3,5 +3,6 @@
         <file>snake_head.jpeg</file>
         <file>snake_body.png</file>
         <file>grass.png</file>
+        <file>food.png</file>
     </qresource>
 </RCC>
