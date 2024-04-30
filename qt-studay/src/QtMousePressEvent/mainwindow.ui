@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>按下Escape键，窗口消失（程序退出）。</string>
+     <string>按下Escape键，推出全屏。</string>
     </property>
    </widget>
   </widget>
