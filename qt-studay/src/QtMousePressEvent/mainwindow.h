@@ -18,5 +18,9 @@ public:
 private:
     Ui::MainWindow *ui;
 
+
+    // QWidget interface
+protected:
+    void mousePressEvent(QMouseEvent *event);
 };
 #endif // MAINWINDOW_H
