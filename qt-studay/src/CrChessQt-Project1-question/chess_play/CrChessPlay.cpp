@@ -8,7 +8,7 @@
 #include<iostream>
 using namespace std;
 
-#include "../FEN//CrFenHelper.h"
+#include "../fen/CrFenHelper.h"
 
 CChessPlay::CChessPlay(void) 
 :m_isAIGo(false)//开局总是人先走，计算机后走
