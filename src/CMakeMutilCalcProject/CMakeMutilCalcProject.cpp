@@ -93,17 +93,30 @@ long long faster_test_the_sum_of_all_primes_within(long long scale)
     auto start = system_clock::now();
     long long sum = 0;
 
-    for (int n = 2; n <= scale; n++) {
-        if (is_number_prime(n)) {
-            sum += n;
+    std::mutex sum_mutex;
+
+    auto fun = [&sum, &sum_mutex](long long scaleStart, long long scaleLast) {
+        for (int n = scaleStart; n <= scaleLast; n++) {
+            if (is_number_prime(n)) {
+                std::lock_guard<std::mutex> lock(sum_mutex);//如果没有多线程互斥访问sum,那么sum的值就可能是错的。
+                sum += n;
+            }
         }
-    }
+     };
+
+    //区间平分，这样后面的第二个线程的计算量还是偏大，因为都是在处理更大的数字
+    std::thread t1(fun, 2, scale / 2);
+    std::thread t2(fun, scale / 2 + 1, scale);
+
+    t1.join();//线程开始运行直到结束
+    t2.join();//线程开始运行直到结束
 
     cout << "the sum of all primes from 2~" << setw(10) << scale << " is : " << setw(15) << sum
         << ", elapled " << setw(10) << static_cast<long long>(duration<double, milli>(system_clock::now() - start).count()) << " milliseconds"
         << endl;
     return sum;
 }
+//d
 //do not change the code in this function 
 //不要修改此函数中的内容
 int main()
