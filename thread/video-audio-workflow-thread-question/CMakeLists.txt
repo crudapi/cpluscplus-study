@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.3)
+project(video-audio-workflow-thread)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/cxx_memory_leak_check)
+aux_source_directory(./src SRC_LIST)
+add_library(video-audio-workflow-thread ${SRC_LIST})
+add_executable(test ./test/video-audio-workflow-test.cpp)
+target_link_libraries(test video-audio-workflow-thread)
