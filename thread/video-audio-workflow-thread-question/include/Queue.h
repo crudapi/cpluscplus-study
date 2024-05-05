@@ -24,10 +24,11 @@ inline void SyncQueue::push(T data)
 inline T SyncQueue::pop(void)
 {
     //(1) your code
+    lock_guard<mutex> lock(m_mutex);
+    T top = m_data_queue.front();
+    m_data_queue.pop_front();
 
-
-
-    return T();
+    return top;
 }
 
 inline bool SyncQueue::empty(void) const

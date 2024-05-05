@@ -32,11 +32,13 @@ const string& Task::get_name(void) const
 
 void Task::exit_thread(void)
 {
-	if (false/*(4) your code*/)/*the exit_task_thread_loop has already been called*/
+	if (m_thread->joinable()/*(4) your code*/)/*the exit_task_thread_loop has already been called*/
 	{
 		m_have_to_exit = true;
 		m_condition_var.notify_one();//sent event to thread loop for break thread loop
 		// (5) your code. wait for the thread return
+
+		m_thread->join();
 	}
 }
 

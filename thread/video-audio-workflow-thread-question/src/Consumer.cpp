@@ -13,7 +13,7 @@ void Consumer::run_loop(void)
     cout << "Consumer::run_loop() begin run...." << endl;
 
     unique_lock<std::mutex> lock(m_mutex);
-    while (false/*(2) your code*/)
+    while (!have_to_exit()/*(2) your code*/)
     {
         m_condition_var.wait(lock);
         //cout << "consumer received one event" << endl;
@@ -46,7 +46,7 @@ void ConsumerSet::push(T data)
     for (auto& consumer : m_consumer_set)
     {
         //(3) your code. every consumer received the data for consume the data.
-        
+        consumer->receive(data);
     }
 }
 void ConsumerSet::add_consumer(Consumer* c)
