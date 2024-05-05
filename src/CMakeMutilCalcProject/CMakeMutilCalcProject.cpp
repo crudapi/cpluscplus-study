@@ -105,11 +105,13 @@ long long faster_test_the_sum_of_all_primes_within(long long scale)
      };
 
     //区间平分，这样后面的第二个线程的计算量还是偏大，因为都是在处理更大的数字
-    std::thread t1(fun, 2, scale / 2);
-    std::thread t2(fun, scale / 2 + 1, scale);
+    std::thread t1(fun, 2, scale / 3);
+    std::thread t2(fun, scale / 3 + 1, scale / 3 * 2);
+    std::thread t3(fun, scale / 3 * 2 + 1, scale);
 
     t1.join();//线程开始运行直到结束
     t2.join();//线程开始运行直到结束
+    t3.join();//线程开始运行直到结束
 
     cout << "the sum of all primes from 2~" << setw(10) << scale << " is : " << setw(15) << sum
         << ", elapled " << setw(10) << static_cast<long long>(duration<double, milli>(system_clock::now() - start).count()) << " milliseconds"
