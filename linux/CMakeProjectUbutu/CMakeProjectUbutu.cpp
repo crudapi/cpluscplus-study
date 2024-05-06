@@ -3,6 +3,7 @@
 
 #include "CMakeProjectUbutu.h"
 
+#include <iostream>
 using namespace std;
 
 int main()
