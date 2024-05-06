@@ -12,7 +12,12 @@ using namespace std;
 
 void* thfunc(void* arg)
 {
-	cout << ("sub thread is running\n");
+	sleep(2);
+	for (int i = 0; i < 20; ++i) 
+	{
+		cout << ("sub thread is running\n");
+	}
+	
 	return NULL;
 }
 
@@ -38,6 +43,7 @@ int main(int argc, char* argv[])
 		cout << "pthread_create failed:" << res << endl;
 	cout << "main thread will exit\n" << endl;
 
+	pthread_exit(NULL);
 
 	return 0;
 }
