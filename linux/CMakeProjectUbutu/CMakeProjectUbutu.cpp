@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	cout << "Hello CMake." << endl;
-	int a = 888;
+	int a = 8889;
 
 	cout << a << endl;
 
