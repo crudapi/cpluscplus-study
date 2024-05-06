@@ -7,9 +7,14 @@
 #include <stdio.h>
 #include <unistd.h> //sleep
 
+using namespace std;
+
+int g_n = 10;
+
 void* thfunc(void* arg)
 {
 	int* pn = (int*)(arg);
+	++g_n;
 	printf("in thfunc %d\n", *pn);
 	return (void*)0;
 }
@@ -23,6 +28,7 @@ typedef struct  //定义结构体的类型
 void* thfunc2(void* arg)
 {
 	MYSTRUCT* p = (MYSTRUCT*)arg;
+	++g_n;
 	printf("in thfunc:n=%d,str=%s\n", p->n, p->str); //打印结构体的内容
 	return (void*)0;
 }
@@ -64,8 +70,13 @@ int main(int argc, char* argv[])
 	pthread_join(tidp, NULL);
 	printf("in main:thread is created\n");
 
+
+
+	cout << g_n << endl;
 	mainDemo();
 
+	++g_n;
+	cout << g_n << endl;
 	return 0;
 }
 
