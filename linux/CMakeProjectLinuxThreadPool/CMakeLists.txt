@@ -12,7 +12,7 @@ endif()
 project ("CMakeProjectLinuxThreadPool")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (CMakeProjectLinuxThreadPool "CMakeProjectLinuxThreadPool.cpp" "CMakeProjectLinuxThreadPool.h")
+add_executable (CMakeProjectLinuxThreadPool "CMakeProjectLinuxThreadPool.cpp" "thread_pool.cpp" "thread_pool.h" "CMakeProjectLinuxThreadPool.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CMakeProjectLinuxThreadPool PROPERTY CXX_STANDARD 20)
