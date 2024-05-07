@@ -36,11 +36,11 @@ int main(int argc, const char* argv[])
 
 	CThreadPool threadPool(5);
 
-	sleep(10);
+	//sleep(10);
 
 	for (int i = 0; i < 10; ++i) 
 	{
-		sleep(2);
+		//sleep(2);
 		threadPool.AddTask(&taskObj);
 	}
 

@@ -23,14 +23,14 @@ void* CThreadPool::ThreadFunc(void* threadData) {
 	pthread_t tid = pthread_self();
 	while (1)
 	{
-		printf("[tid: %lu]ThreadFunc entry\n", tid);
+		//printf("[tid: %lu]ThreadFunc entry\n", tid);
 		pthread_mutex_lock(&m_pthreadMutex);
 		//如果队列为空，等待新任务进入任务队列
 		while (m_vecTaskList.size() == 0 && !shutdown) 
 		{
-			printf("[tid: %lu]pthread_cond_wait...\n", tid);
+			//printf("[tid: %lu]pthread_cond_wait...\n", tid);
 			pthread_cond_wait(&m_pthreadCond, &m_pthreadMutex);
-			printf("[tid: %lu]pthread_cond_wait done\n", tid);
+			//printf("[tid: %lu]pthread_cond_wait done\n", tid);
 		}
 			
 
