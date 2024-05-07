@@ -44,6 +44,17 @@ int main(int argc, const char* argv[])
 		threadPool.AddTask(&taskObj);
 	}
 
+	//获取cpu内核数量
+	int m_max_thread_count = 0;
+	int icore_num = std::thread::hardware_concurrency();
+	if (icore_num > 0)
+		m_max_thread_count = 2 * icore_num;
+	else
+		m_max_thread_count = 4;
+
+	cout << "m_max_thread_count = " << m_max_thread_count << endl;
+
+	cout << "icore_num = " << icore_num << endl;
 
 	while (1) 
 	{
