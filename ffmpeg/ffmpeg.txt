@@ -1,0 +1,103 @@
+
+https://blog.csdn.net/shulianghan/article/details/138139433
+https://trac.ffmpeg.org/wiki/Capture/Desktop
+
+ffmpeg -f dshow -i video="screen-capture-recorder" output.mkv
+ffmpeg -f dshow -i video="UScreenCapture":audio="Microphone" output.mkv
+ffmpeg -f dshow -i video="UScreenCapture" -f dshow -i audio="Microphone" output.mkv
+
+
+ffmpeg -list_devices true -f dshow -i dummy
+  libpostproc    58.  1.100 / 58.  1.100
+[dshow @ 0000026c12c20600] "XiaoMi USB 2.0 Webcam"
+[dshow @ 0000026c12c20600] "UScreenCapture"
+[dshow @ 0000026c12c20600] "screen-capture-recor
+der"
+[dshow @ 0000026c12c20600] "麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)"
+[dshow @ 0000026c12c20600] "virtual-audio-capturer"
+
+ffmpeg -f dshow -i video="UScreenCapture" UScreenCapture.mp4
+
+ffmpeg -f dshow -i video="screen-capture-recorder" screen-capture-recorder.mp4
+ffmpeg -f dshow -i audio="virtual-audio-capturer" virtual-audio-capturer.aac
+
+
+ffmpeg -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" -f dshow -i audio="virtual-audio-capturer" -filter_complex amix=inputs=2:duration=first:dropout_transition=2 two.aac
+
+
+命令 , 可以同时录制 麦克风 + 系统音频 声音 ;
+
+-f dshow 参数 指定了 在 Windows 中使用 DirectShow 框架管理的 音视频设备 作为输入设备 ;
+
+-f dshow -i audio="麦克风 (Realtek Audio)" 参数 设置的是 麦克风 虚拟设备 音频输入 ;
+
+-f dshow -i audio="virtual-audio-capturer" 参数 设置的是 系统虚拟音频设备输入 ;
+
+-filter_complex 参数用于创建复杂的滤镜链来处理音视频流 ;
+
+-filter_complex amix=inputs=2:duration=first:dropout_transition=2 参数 是 混音选项 ,
+
+amix 参数 指定该设置是一个滤镜 , 用于混合音频和视频流 ;
+inputs=2 参数 指定了要混合的输入流的数量 为 2 个 ;
+duration=first 参数 指定 输入的时长 等于 第一个输入的时长 , 也就是 麦克风设备 的输入时长 ;
+dropout_transition=2 参数 设置 在混合过程中出现的一个输入流早于另一个结束的情况 , 指定了一个 秒 时间段 , 在这个时间段内 如果一个输入流结束了而另一个还在继续 , 则逐渐降低仍在播放的流的音量 , 直到完全静音 , 目的是使音频过渡更加平滑 ; 这里设置是 2 秒时间内逐渐静音 ;
+
+
+ffmpeg -f dshow -i audio="virtual-audio-capturer" -f dshow -i video="screen-capture-recorder" virtual-audio-capturer-screen-capture-recorder.mp4
+
+
+ffmpeg -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" -f dshow -i audio="virtual-audio-capturer" -filter_complex amix=inputs=2:duration=first:dropout_transition=2 -f dshow -i video="screen-capture-recorder" all.mp4
+
+
+ffmpeg -f dshow -i video="UScreenCapture" -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" UScreenCapture麦克风阵列.mkv
+
+
+ffmpeg -f gdigrab -framerate 30 -i desktop gdigrab.mkv
+
+
+ffmpeg -f dshow -i video="XiaoMi USB 2.0 Webcam" -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" XiaoMi.mkv
+
+
+ffmpeg -f dshow -i video="XiaoMi USB 2.0 Webcam" output.mp4
+
+ffplay -f dshow -i video="XiaoMi USB 2.0 Webcam"
+
+
+ffmpeg -list_options true -f dshow -i video="XiaoMi USB 2.0 Webcam"
+
+
+  libpostproc    58.  1.100 / 58.  1.100
+[dshow @ 000001b822940600] DirectShow video device options (from video devices)
+[dshow @ 000001b822940600]  Pin "捕获" (alternative pin name "捕获")
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=1920x1080 fps=5 max s=1920x1080 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=1280x720 fps=15 max s=1280x720 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=640x360 fps=15 max s=640x360 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=176x144 fps=15 max s=176x144 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=320x240 fps=15 max s=320x240 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=160x120 fps=15 max s=160x120 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=960x540 fps=15 max s=960x540 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=848x480 fps=15 max s=848x480 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=424x240 fps=15 max s=424x240 fps=30
+[dshow @ 000001b822940600]   vcodec=mjpeg  min s=320x180 fps=15 max s=320x180 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=1920x1080 fps=5 max s=1920x1080 fps=5
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=1280x720 fps=10 max s=1280x720 fps=10
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=640x360 fps=15 max s=640x360 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=176x144 fps=15 max s=176x144 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=320x240 fps=15 max s=320x240 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=160x120 fps=15 max s=160x120 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=960x540 fps=10 max s=960x540 fps=10
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=848x480 fps=10 max s=848x480 fps=10
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=424x240 fps=15 max s=424x240 fps=30
+[dshow @ 000001b822940600]   pixel_format=yuyv422  min s=320x180 fps=15 max s=320x180 fps=30
+
+  这里我们看到采集设备支持的最大分辨率是720x576，输出像素格式是yuyv422，支持的帧率为29.97和25FPS。
+
+  下面我们执行另外一条命令，将摄像头的图像和麦克风的音频录制保存成一个文件。命令如下：
+
+  ffmpeg -f dshow -i video="XiaoMi USB 2.0 Webcam" -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" -vcodec libx264 -acodec aac -strict -2 mycamera.mkv
+  
+  https://fuhanghang.blog.csdn.net/article/details/123553898?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-123553898-blog-88632455.235%5Ev43%5Epc_blog_bottom_relevance_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-123553898-blog-88632455.235%5Ev43%5Epc_blog_bottom_relevance_base3&utm_relevant_index=18
