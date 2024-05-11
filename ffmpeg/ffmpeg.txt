@@ -6,7 +6,7 @@ ffmpeg -f dshow -i video="screen-capture-recorder" output.mkv
 ffmpeg -f dshow -i video="UScreenCapture":audio="Microphone" output.mkv
 ffmpeg -f dshow -i video="UScreenCapture" -f dshow -i audio="Microphone" output.mkv
 
-
+ffmpeg -list_options true -f dshow -i  video="screen-capture-recorder"
 ffmpeg -list_devices true -f dshow -i dummy
   libpostproc    58.  1.100 / 58.  1.100
 [dshow @ 0000026c12c20600] "XiaoMi USB 2.0 Webcam"
@@ -101,3 +101,6 @@ ffmpeg -list_options true -f dshow -i video="XiaoMi USB 2.0 Webcam"
   ffmpeg -f dshow -i video="XiaoMi USB 2.0 Webcam" -f dshow -i audio="麦克风阵列 (适用于数字麦克风的英特尔® 智音技术)" -vcodec libx264 -acodec aac -strict -2 mycamera.mkv
   
   https://fuhanghang.blog.csdn.net/article/details/123553898?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-123553898-blog-88632455.235%5Ev43%5Epc_blog_bottom_relevance_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-123553898-blog-88632455.235%5Ev43%5Epc_blog_bottom_relevance_base3&utm_relevant_index=18
+  
+  
+  ffmpeg -f dshow -i video="XiaoMi USB 2.0 Webcam" -vcodec libx264 mycamera.mkv
